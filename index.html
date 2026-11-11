@@ -14,205 +14,68 @@
  --panel:#10243a;
  --border:#244463;
 }
-
 *{box-sizing:border-box}
-
-body{
- margin:0;
- background:#071321;
- color:#f3f7fc;
- font-family:Arial,sans-serif;
-}
-
+body{margin:0;background:#071321;color:#f3f7fc;font-family:Arial,sans-serif}
 header{
- min-height:68px;
- background:linear-gradient(110deg,#071a30,#0b3156);
- border-bottom:2px solid var(--blue);
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:12px 22px;
+ min-height:68px;background:linear-gradient(110deg,#071a30,#0b3156);
+ border-bottom:2px solid var(--blue);display:flex;align-items:center;
+ justify-content:space-between;padding:12px 22px;
 }
-
-header h1{
- font-size:20px;
- letter-spacing:2.5px;
- margin:0;
-}
-
+header h1{font-size:20px;letter-spacing:2.5px;margin:0}
 header span{color:#36a8ff}
-
-.header-sub{
- font-size:11px;
- color:#9bb0c5;
- letter-spacing:1px;
-}
-
+.header-sub{font-size:11px;color:#9bb0c5;letter-spacing:1px}
 main{
- display:grid;
- grid-template-columns:235px minmax(0,1fr) 250px;
- gap:14px;
- padding:14px;
- max-width:1700px;
- margin:auto;
+ display:grid;grid-template-columns:235px minmax(0,1fr) 250px;
+ gap:14px;padding:14px;max-width:1700px;margin:auto;
 }
-
 .panel{
  background:linear-gradient(145deg,#10243a,#0c1c30);
- border:1px solid #244463;
- border-radius:12px;
- padding:14px;
- min-width:0;
- box-shadow:0 8px 25px rgba(0,0,0,.2);
+ border:1px solid #244463;border-radius:12px;padding:14px;
+ min-width:0;box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
-
-h3{
- font-size:12px;
- color:#55b5ff;
- text-transform:uppercase;
- letter-spacing:1px;
- margin:4px 0 12px;
-}
-
-hr{
- border:0;
- border-top:1px solid #244463;
- margin:16px 0;
-}
-
+h3{font-size:12px;color:#55b5ff;text-transform:uppercase;letter-spacing:1px;margin:4px 0 12px}
+hr{border:0;border-top:1px solid #244463;margin:16px 0}
 button,input,select{font:inherit}
-
 button{
- background:#19344f;
- color:#eee;
- border:1px solid #315574;
- padding:9px 10px;
- border-radius:8px;
- cursor:pointer;
- transition:.2s;
+ background:#19344f;color:#eee;border:1px solid #315574;
+ padding:9px 10px;border-radius:8px;cursor:pointer;transition:.2s;
 }
-
-button:hover{
- background:#24517a;
- border-color:#39aaff;
- transform:translateY(-1px);
-}
-
+button:hover{background:#24517a;border-color:#39aaff;transform:translateY(-1px)}
 button.active,button.primary{
  background:linear-gradient(135deg,#0878d1,#0756a5);
- border-color:#38a9ff;
- color:white;
+ border-color:#38a9ff;color:white;
 }
-
-button.danger{
- background:#652c39;
- border-color:#93404d;
-}
-
-.tools{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:7px;
-}
-
-.tools button{
- font-size:12px;
- min-height:46px;
- font-weight:500;
-}
-
+button.danger{background:#652c39;border-color:#93404d}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.tools button{font-size:12px;min-height:46px;font-weight:500}
 select,input{
- width:100%;
- background:#081727;
- color:#eee;
- border:1px solid #31516e;
- border-radius:8px;
- padding:9px;
- margin:5px 0 11px;
+ width:100%;background:#081727;color:#eee;border:1px solid #31516e;
+ border-radius:8px;padding:9px;margin:5px 0 11px;
 }
-
 input:focus,select:focus{
- outline:none;
- border-color:#2499f2;
- box-shadow:0 0 0 2px rgba(36,153,242,.15);
+ outline:none;border-color:#2499f2;box-shadow:0 0 0 2px rgba(36,153,242,.15);
 }
-
-input[type=color]{
- height:38px;
- padding:3px;
-}
-
+input[type=color]{height:38px;padding:3px}
 input[type=range]{padding:0}
-
-label{
- font-size:12px;
- color:#b9cadd;
- display:block;
-}
-
+label{font-size:12px;color:#b9cadd;display:block}
 .row{display:flex;gap:7px}
 .row>*{flex:1;min-width:0}
-
-.actions{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:7px;
-}
-
-.workspace{
- min-width:0;
- display:flex;
- flex-direction:column;
- gap:10px;
-}
-
-.toolbar{
- display:flex;
- gap:7px;
- flex-wrap:wrap;
-}
-
-.toolbar button{
- font-size:12px;
- background:#173653;
-}
-
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.workspace{min-width:0;display:flex;flex-direction:column;gap:10px}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap}
+.toolbar button{font-size:12px;background:#173653}
 .canvas-wrap{
- background:#10243a;
- border:1px solid #244463;
- border-radius:12px;
- padding:10px;
- overflow:auto;
- box-shadow:0 8px 25px rgba(0,0,0,.2);
+ background:#10243a;border:1px solid #244463;border-radius:12px;
+ padding:10px;overflow:auto;box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
-
-canvas{
- display:block;
- width:100%;
- height:auto;
- background:#d8d8d0;
- border-radius:5px;
- touch-action:none;
-}
-
-#count{
- font-size:12px;
- color:#55b5ff;
-}
-
-.hint{
- font-size:11px;
- color:#9bb0c5;
- line-height:1.6;
-}
-
+canvas{display:block;width:100%;height:auto;background:#d8d8d0;border-radius:5px;touch-action:none}
+#count{font-size:12px;color:#55b5ff}
+.hint{font-size:11px;color:#9bb0c5;line-height:1.6}
 #properties{display:none}
-
 @media(max-width:1050px){
  main{grid-template-columns:190px minmax(0,1fr)}
  .right-panel{grid-column:1/-1}
 }
-
 @media(max-width:650px){
  main{grid-template-columns:1fr;padding:8px}
  .right-panel{grid-column:auto}
@@ -223,17 +86,14 @@ canvas{
 </head>
 
 <body>
-
 <header>
  <h1>MAXXISEG <span>│ CROQUI</span></h1>
  <div class="header-sub">EDITOR DE CENÁRIOS DE SINISTRO</div>
 </header>
 
 <main>
-
 <aside class="panel">
  <h3>1. Cenário da via</h3>
-
  <label>Modelo de rua</label>
  <select id="roadType" onchange="changeRoad()">
   <option value="horizontal">Rua horizontal</option>
@@ -256,7 +116,6 @@ canvas{
  <input type="color" id="roadColor" value="#55585d" onchange="draw()">
 
  <hr>
-
  <h3>2. Elementos</h3>
  <div class="tools">
   <button class="active" data-tool="select" onclick="setTool('select',this)">↖ Selecionar</button>
@@ -281,7 +140,6 @@ canvas{
  </p>
 
  <hr>
-
  <h3>3. Projeto</h3>
  <div class="actions">
   <button onclick="undo()">↶ Desfazer</button>
@@ -292,12 +150,10 @@ canvas{
   <button onclick="carregarProjeto()">Abrir JSON</button>
   <button class="primary" style="grid-column:1/-1" onclick="exportarPNG()">Exportar imagem PNG</button>
  </div>
-
  <input type="file" id="fileInput" accept=".json" style="display:none" onchange="abrirArquivo(event)">
 </aside>
 
 <section class="workspace">
-
  <div class="toolbar">
   <button onclick="rotateSelected(-15)">↶ Girar -15°</button>
   <button onclick="rotateSelected(15)">↷ Girar +15°</button>
@@ -305,34 +161,26 @@ canvas{
   <button onclick="changeLayer(-1)">Enviar para trás</button>
   <button onclick="resetZoom()">Centralizar</button>
  </div>
-
  <div class="canvas-wrap">
   <canvas id="canvas" width="1000" height="680"></canvas>
  </div>
-
  <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
   <span id="count">0 elemento(s) adicionado(s)</span>
   <span class="hint">Área de desenho: 1000 × 680 px</span>
  </div>
-
 </section>
 
 <aside class="panel right-panel">
  <h3>Propriedades do elemento</h3>
-
  <div id="noSelection" class="hint">
   Nenhum elemento selecionado.<br><br>
   Clique em um elemento do croqui para editar suas propriedades.
  </div>
-
  <div id="properties">
-
   <label>Identificação</label>
   <div id="selectedInfo" style="font-size:13px;margin:4px 0 12px;color:#55b5ff"></div>
-
   <label>Texto / identificação</label>
   <input id="objLabel" type="text" placeholder="Ex.: Veículo A" oninput="updateSelected('label',this.value)">
-
   <div class="row">
    <div>
     <label>Posição X</label>
@@ -343,7 +191,6 @@ canvas{
     <input id="posY" type="number" onchange="updateSelected('y',+this.value)">
    </div>
   </div>
-
   <div class="row">
    <div>
     <label>Largura</label>
@@ -354,16 +201,13 @@ canvas{
     <input id="objH" type="number" min="10" max="600" onchange="updateSelected('h',+this.value)">
    </div>
   </div>
-
   <label>Rotação</label>
   <input id="objRot" type="range" min="0" max="359" oninput="updateSelected('rot',+this.value)">
   <div style="display:flex;justify-content:space-between;font-size:11px;color:#aaa">
    <span>0°</span><span id="rotationValue">0°</span><span>359°</span>
   </div>
-
   <label>Cor principal</label>
   <input id="objColor" type="color" onchange="updateSelected('color',this.value)">
-
   <div class="actions">
    <button onclick="rotateSelected(-90)">-90°</button>
    <button onclick="rotateSelected(90)">+90°</button>
@@ -371,9 +215,7 @@ canvas{
    <button class="danger" onclick="deleteSelected()">Excluir</button>
   </div>
  </div>
-
  <hr>
-
  <h3>Orientações</h3>
  <p class="hint">
   • Clique para inserir elementos.<br>
@@ -383,8 +225,55 @@ canvas{
   • Exporte o resultado em PNG.
  </p>
 </aside>
-
 </main>
+
+<!-- JANELA DE TEXTO -->
+<div id="textDialog" style="
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:99999;
+ background:rgba(0,0,0,.75);
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+">
+ <div style="
+  width:100%;
+  max-width:380px;
+  padding:22px;
+  background:#10243a;
+  border:1px solid #2499f2;
+  border-radius:12px;
+  box-shadow:0 10px 40px rgba(0,0,0,.5);
+ ">
+  <h3>ADICIONAR TEXTO</h3>
+
+  <label for="textDialogInput">Digite o texto que deseja inserir:</label>
+
+  <input
+   id="textDialogInput"
+   type="text"
+   placeholder="Ex.: Veículo A"
+   style="width:100%;margin:12px 0"
+  >
+
+  <div style="display:flex;gap:10px">
+   <button
+    type="button"
+    onclick="cancelarTexto()"
+    style="flex:1"
+   >Cancelar</button>
+
+   <button
+    type="button"
+    class="primary"
+    onclick="confirmarTexto()"
+    style="flex:1"
+   >Continuar</button>
+  </div>
+ </div>
+</div>
 
 <script>
 const canvas=document.getElementById("canvas");
@@ -393,6 +282,7 @@ const ctx=canvas.getContext("2d");
 let objects=[];
 let selected=null;
 let tool="select";
+let pendingText=null;
 let road="horizontal";
 let dragging=false;
 let dragOffset={x:0,y:0};
@@ -437,21 +327,78 @@ function undo(){
  sync();
 }
 
+/* FUNÇÕES DO ELEMENTO TEXTO */
 function setTool(t,btn){
+ if(t==="text"){
+  tool="text";
+  pendingText=null;
+
+  document.querySelectorAll(".tools button").forEach(b=>b.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+
+  const modal=document.getElementById("textDialog");
+  const field=document.getElementById("textDialogInput");
+
+  modal.style.display="flex";
+  field.value="";
+
+  setTimeout(()=>field.focus(),50);
+  return;
+ }
+
  tool=t;
  document.querySelectorAll(".tools button").forEach(b=>b.classList.remove("active"));
  if(btn)btn.classList.add("active");
  canvas.style.cursor=t==="select"?"default":"crosshair";
 }
 
+function confirmarTexto(){
+ const field=document.getElementById("textDialogInput");
+ const value=field.value.trim();
+
+ if(!value){
+  alert("Digite um texto antes de continuar.");
+  field.focus();
+  return;
+ }
+
+ pendingText=value;
+ document.getElementById("textDialog").style.display="none";
+
+ tool="text";
+ canvas.style.cursor="crosshair";
+}
+
+function cancelarTexto(){
+ pendingText=null;
+ document.getElementById("textDialog").style.display="none";
+
+ tool="select";
+
+ document.querySelectorAll(".tools button").forEach(b=>b.classList.remove("active"));
+
+ const selectBtn=document.querySelector('[data-tool="select"]');
+ if(selectBtn)selectBtn.classList.add("active");
+
+ canvas.style.cursor="default";
+}
+
+document.getElementById("textDialogInput").addEventListener("keydown",function(e){
+ if(e.key==="Enter"){
+  e.preventDefault();
+  confirmarTexto();
+ }
+ if(e.key==="Escape"){
+  e.preventDefault();
+  cancelarTexto();
+ }
+});
+
 function changeRoad(){
  road=document.getElementById("roadType").value;
  draw();
 }
-
-function roadColor(){
- return document.getElementById("roadColor").value;
-}
+function roadColor(){return document.getElementById("roadColor").value}
 
 function roundedRect(c,x,y,w,h,r){
  c.beginPath();
@@ -461,7 +408,6 @@ function roundedRect(c,x,y,w,h,r){
 function background(){
  ctx.fillStyle="#d9d9d1";
  ctx.fillRect(0,0,1000,680);
-
  if(road==="horizontal")drawStraightHorizontal();
  if(road==="vertical")drawStraightVertical();
  if(road==="twoway")drawTwoWay();
@@ -478,58 +424,24 @@ function background(){
 }
 
 function drawStraightHorizontal(){
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(0,235,1000,210);
- ctx.fillStyle=roadColor();
- ctx.fillRect(0,247,1000,186);
-
- ctx.strokeStyle="#eeeeea";
- ctx.lineWidth=3;
- ctx.setLineDash([24,20]);
- ctx.beginPath();
- ctx.moveTo(0,340);
- ctx.lineTo(1000,340);
- ctx.stroke();
- ctx.setLineDash([]);
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(0,235,1000,210);
+ ctx.fillStyle=roadColor();ctx.fillRect(0,247,1000,186);
+ ctx.strokeStyle="#eeeeea";ctx.lineWidth=3;ctx.setLineDash([24,20]);
+ ctx.beginPath();ctx.moveTo(0,340);ctx.lineTo(1000,340);ctx.stroke();ctx.setLineDash([]);
 }
 
 function drawStraightVertical(){
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(395,0,210,680);
- ctx.fillStyle=roadColor();
- ctx.fillRect(407,0,186,680);
-
- ctx.strokeStyle="#eeeeea";
- ctx.lineWidth=3;
- ctx.setLineDash([24,20]);
- ctx.beginPath();
- ctx.moveTo(500,0);
- ctx.lineTo(500,680);
- ctx.stroke();
- ctx.setLineDash([]);
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(395,0,210,680);
+ ctx.fillStyle=roadColor();ctx.fillRect(407,0,186,680);
+ ctx.strokeStyle="#eeeeea";ctx.lineWidth=3;ctx.setLineDash([24,20]);
+ ctx.beginPath();ctx.moveTo(500,0);ctx.lineTo(500,680);ctx.stroke();ctx.setLineDash([]);
 }
 
 function drawTwoWay(){
- // Calçadas e bordas
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(0,225,1000,230);
-
- // Asfalto
- ctx.fillStyle=roadColor();
- ctx.fillRect(0,240,1000,200);
-
- // Dupla linha amarela central
- ctx.strokeStyle="#f2d34f";
- ctx.lineWidth=3;
- ctx.setLineDash([]);
- ctx.beginPath();
- ctx.moveTo(0,337);
- ctx.lineTo(1000,337);
- ctx.moveTo(0,343);
- ctx.lineTo(1000,343);
- ctx.stroke();
-
- // Setas de sentidos opostos
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(0,225,1000,230);
+ ctx.fillStyle=roadColor();ctx.fillRect(0,240,1000,200);
+ ctx.strokeStyle="#f2d34f";ctx.lineWidth=3;ctx.setLineDash([]);
+ ctx.beginPath();ctx.moveTo(0,337);ctx.lineTo(1000,337);ctx.moveTo(0,343);ctx.lineTo(1000,343);ctx.stroke();
  for(let x=130;x<1000;x+=250){
   drawArrowAt(x,285,0,"#eeeeee");
   drawArrowAt(x+100,395,Math.PI,"#eeeeee");
@@ -539,270 +451,123 @@ function drawTwoWay(){
 function drawCross(){
  ctx.fillStyle="#c2c1b9";
  ctx.beginPath();
- ctx.moveTo(390,0);ctx.lineTo(610,0);
- ctx.lineTo(610,230);ctx.lineTo(1000,230);
- ctx.lineTo(1000,450);ctx.lineTo(610,450);
- ctx.lineTo(610,680);ctx.lineTo(390,680);
- ctx.lineTo(390,450);ctx.lineTo(0,450);
- ctx.lineTo(0,230);ctx.lineTo(390,230);
+ ctx.moveTo(390,0);ctx.lineTo(610,0);ctx.lineTo(610,230);ctx.lineTo(1000,230);
+ ctx.lineTo(1000,450);ctx.lineTo(610,450);ctx.lineTo(610,680);ctx.lineTo(390,680);
+ ctx.lineTo(390,450);ctx.lineTo(0,450);ctx.lineTo(0,230);ctx.lineTo(390,230);
  ctx.closePath();ctx.fill();
 
  ctx.fillStyle=roadColor();
  ctx.beginPath();
- ctx.moveTo(405,0);ctx.lineTo(595,0);
- ctx.lineTo(595,245);ctx.lineTo(1000,245);
- ctx.lineTo(1000,435);ctx.lineTo(595,435);
- ctx.lineTo(595,680);ctx.lineTo(405,680);
- ctx.lineTo(405,435);ctx.lineTo(0,435);
- ctx.lineTo(0,245);ctx.lineTo(405,245);
+ ctx.moveTo(405,0);ctx.lineTo(595,0);ctx.lineTo(595,245);ctx.lineTo(1000,245);
+ ctx.lineTo(1000,435);ctx.lineTo(595,435);ctx.lineTo(595,680);ctx.lineTo(405,680);
+ ctx.lineTo(405,435);ctx.lineTo(0,435);ctx.lineTo(0,245);ctx.lineTo(405,245);
  ctx.closePath();ctx.fill();
 
- ctx.strokeStyle="#eeeeea";
- ctx.lineWidth=3;
- ctx.setLineDash([22,18]);
- ctx.beginPath();
- ctx.moveTo(0,340);ctx.lineTo(1000,340);
- ctx.moveTo(500,0);ctx.lineTo(500,680);
- ctx.stroke();
- ctx.setLineDash([]);
+ ctx.strokeStyle="#eeeeea";ctx.lineWidth=3;ctx.setLineDash([22,18]);
+ ctx.beginPath();ctx.moveTo(0,340);ctx.lineTo(1000,340);ctx.moveTo(500,0);ctx.lineTo(500,680);
+ ctx.stroke();ctx.setLineDash([]);
 }
 
 function drawT(direction){
  ctx.fillStyle="#c2c1b9";
-
  if(direction==="down"){
-  ctx.fillRect(0,225,1000,230);
-  ctx.fillRect(390,225,220,455);
+  ctx.fillRect(0,225,1000,230);ctx.fillRect(390,225,220,455);
  }else if(direction==="up"){
-  ctx.fillRect(0,225,1000,230);
-  ctx.fillRect(390,0,220,455);
+  ctx.fillRect(0,225,1000,230);ctx.fillRect(390,0,220,455);
  }else if(direction==="left"){
-  ctx.fillRect(390,0,220,680);
-  ctx.fillRect(0,225,610,230);
+  ctx.fillRect(390,0,220,680);ctx.fillRect(0,225,610,230);
  }else{
-  ctx.fillRect(390,0,220,680);
-  ctx.fillRect(390,225,610,230);
+  ctx.fillRect(390,0,220,680);ctx.fillRect(390,225,610,230);
  }
 
  ctx.fillStyle=roadColor();
-
  if(direction==="down"){
-  ctx.fillRect(0,240,1000,200);
-  ctx.fillRect(405,240,190,440);
+  ctx.fillRect(0,240,1000,200);ctx.fillRect(405,240,190,440);
  }else if(direction==="up"){
-  ctx.fillRect(0,240,1000,200);
-  ctx.fillRect(405,0,190,440);
+  ctx.fillRect(0,240,1000,200);ctx.fillRect(405,0,190,440);
  }else if(direction==="left"){
-  ctx.fillRect(405,0,190,680);
-  ctx.fillRect(0,240,595,200);
+  ctx.fillRect(405,0,190,680);ctx.fillRect(0,240,595,200);
  }else{
-  ctx.fillRect(405,0,190,680);
-  ctx.fillRect(405,240,595,200);
+  ctx.fillRect(405,0,190,680);ctx.fillRect(405,240,595,200);
  }
 
- ctx.strokeStyle="#eee";
- ctx.lineWidth=3;
- ctx.setLineDash([22,18]);
- ctx.beginPath();
-
+ ctx.strokeStyle="#eee";ctx.lineWidth=3;ctx.setLineDash([22,18]);ctx.beginPath();
  if(direction==="down"){
-  ctx.moveTo(0,340);ctx.lineTo(1000,340);
-  ctx.moveTo(500,340);ctx.lineTo(500,680);
+  ctx.moveTo(0,340);ctx.lineTo(1000,340);ctx.moveTo(500,340);ctx.lineTo(500,680);
  }else if(direction==="up"){
-  ctx.moveTo(0,340);ctx.lineTo(1000,340);
-  ctx.moveTo(500,0);ctx.lineTo(500,340);
+  ctx.moveTo(0,340);ctx.lineTo(1000,340);ctx.moveTo(500,0);ctx.lineTo(500,340);
  }else if(direction==="left"){
-  ctx.moveTo(500,0);ctx.lineTo(500,680);
-  ctx.moveTo(0,340);ctx.lineTo(500,340);
+  ctx.moveTo(500,0);ctx.lineTo(500,680);ctx.moveTo(0,340);ctx.lineTo(500,340);
  }else{
-  ctx.moveTo(500,0);ctx.lineTo(500,680);
-  ctx.moveTo(500,340);ctx.lineTo(1000,340);
+  ctx.moveTo(500,0);ctx.lineTo(500,680);ctx.moveTo(500,340);ctx.lineTo(1000,340);
  }
- ctx.stroke();
- ctx.setLineDash([]);
+ ctx.stroke();ctx.setLineDash([]);
 }
 
 function drawCorner(){
- ctx.lineCap="round";
- ctx.lineJoin="round";
-
- ctx.strokeStyle="#c2c1b9";
- ctx.lineWidth=230;
- ctx.beginPath();
- ctx.moveTo(0,340);
- ctx.lineTo(500,340);
- ctx.quadraticCurveTo(590,340,590,430);
- ctx.lineTo(590,680);
- ctx.stroke();
-
- ctx.strokeStyle=roadColor();
- ctx.lineWidth=200;
- ctx.beginPath();
- ctx.moveTo(0,340);
- ctx.lineTo(500,340);
- ctx.quadraticCurveTo(575,340,575,415);
- ctx.lineTo(575,680);
- ctx.stroke();
-
- ctx.strokeStyle="#eee";
- ctx.lineWidth=3;
- ctx.setLineDash([22,18]);
- ctx.beginPath();
- ctx.moveTo(0,340);
- ctx.lineTo(500,340);
- ctx.quadraticCurveTo(575,340,575,415);
- ctx.lineTo(575,680);
- ctx.stroke();
- ctx.setLineDash([]);
+ ctx.lineCap="round";ctx.lineJoin="round";
+ ctx.strokeStyle="#c2c1b9";ctx.lineWidth=230;ctx.beginPath();
+ ctx.moveTo(0,340);ctx.lineTo(500,340);ctx.quadraticCurveTo(590,340,590,430);ctx.lineTo(590,680);ctx.stroke();
+ ctx.strokeStyle=roadColor();ctx.lineWidth=200;ctx.beginPath();
+ ctx.moveTo(0,340);ctx.lineTo(500,340);ctx.quadraticCurveTo(575,340,575,415);ctx.lineTo(575,680);ctx.stroke();
+ ctx.strokeStyle="#eee";ctx.lineWidth=3;ctx.setLineDash([22,18]);ctx.beginPath();
+ ctx.moveTo(0,340);ctx.lineTo(500,340);ctx.quadraticCurveTo(575,340,575,415);ctx.lineTo(575,680);ctx.stroke();ctx.setLineDash([]);
 }
 
 function drawRoundabout(){
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(390,0,220,680);
- ctx.fillRect(0,230,1000,220);
-
- ctx.fillStyle=roadColor();
- ctx.fillRect(405,0,190,680);
- ctx.fillRect(0,245,1000,190);
-
- ctx.fillStyle="#c2c1b9";
- ctx.beginPath();
- ctx.arc(500,340,225,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle=roadColor();
- ctx.beginPath();
- ctx.arc(500,340,210,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="#c2c1b9";
- ctx.beginPath();
- ctx.arc(500,340,105,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="#a6b08d";
- ctx.beginPath();
- ctx.arc(500,340,91,0,Math.PI*2);
- ctx.fill();
-
- ctx.strokeStyle="#eee";
- ctx.lineWidth=3;
- ctx.setLineDash([16,14]);
- ctx.beginPath();
- ctx.arc(500,340,155,0,Math.PI*2);
- ctx.stroke();
- ctx.setLineDash([]);
-
- ctx.fillStyle="#65734e";
- ctx.beginPath();
- ctx.arc(500,340,18,0,Math.PI*2);
- ctx.fill();
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(390,0,220,680);ctx.fillRect(0,230,1000,220);
+ ctx.fillStyle=roadColor();ctx.fillRect(405,0,190,680);ctx.fillRect(0,245,1000,190);
+ ctx.fillStyle="#c2c1b9";ctx.beginPath();ctx.arc(500,340,225,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle=roadColor();ctx.beginPath();ctx.arc(500,340,210,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#c2c1b9";ctx.beginPath();ctx.arc(500,340,105,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#a6b08d";ctx.beginPath();ctx.arc(500,340,91,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle="#eee";ctx.lineWidth=3;ctx.setLineDash([16,14]);ctx.beginPath();ctx.arc(500,340,155,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle="#65734e";ctx.beginPath();ctx.arc(500,340,18,0,Math.PI*2);ctx.fill();
 }
 
 function drawAvenue(){
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(0,145,1000,390);
-
- ctx.fillStyle=roadColor();
- ctx.fillRect(0,160,1000,155);
- ctx.fillRect(0,365,1000,155);
-
- ctx.fillStyle="#a6b08d";
- ctx.fillRect(0,315,1000,50);
-
- ctx.strokeStyle="#8b9875";
- ctx.lineWidth=2;
- ctx.strokeRect(0,315,1000,50);
-
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(0,145,1000,390);
+ ctx.fillStyle=roadColor();ctx.fillRect(0,160,1000,155);ctx.fillRect(0,365,1000,155);
+ ctx.fillStyle="#a6b08d";ctx.fillRect(0,315,1000,50);
+ ctx.strokeStyle="#8b9875";ctx.lineWidth=2;ctx.strokeRect(0,315,1000,50);
  for(let x=60;x<980;x+=120){
-  ctx.fillStyle="#687c51";
-  ctx.beginPath();
-  ctx.arc(x,340,10,0,Math.PI*2);
-  ctx.fill();
+  ctx.fillStyle="#687c51";ctx.beginPath();ctx.arc(x,340,10,0,Math.PI*2);ctx.fill();
  }
-
- ctx.strokeStyle="#eee";
- ctx.lineWidth=3;
- ctx.setLineDash([22,18]);
- ctx.beginPath();
- ctx.moveTo(0,237);ctx.lineTo(1000,237);
- ctx.moveTo(0,442);ctx.lineTo(1000,442);
- ctx.stroke();
- ctx.setLineDash([]);
+ ctx.strokeStyle="#eee";ctx.lineWidth=3;ctx.setLineDash([22,18]);ctx.beginPath();
+ ctx.moveTo(0,237);ctx.lineTo(1000,237);ctx.moveTo(0,442);ctx.lineTo(1000,442);ctx.stroke();ctx.setLineDash([]);
 }
 
 function drawOneWay(){
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(0,235,1000,210);
-
- ctx.fillStyle=roadColor();
- ctx.fillRect(0,247,1000,186);
-
- ctx.strokeStyle="#eee";
- ctx.lineWidth=3;
- ctx.setLineDash([22,18]);
- ctx.beginPath();
- ctx.moveTo(0,340);ctx.lineTo(1000,340);
- ctx.stroke();
- ctx.setLineDash([]);
-
- for(let x=160;x<900;x+=250){
-  drawArrowAt(x,340,0,"#e9e9e9");
- }
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(0,235,1000,210);
+ ctx.fillStyle=roadColor();ctx.fillRect(0,247,1000,186);
+ ctx.strokeStyle="#eee";ctx.lineWidth=3;ctx.setLineDash([22,18]);ctx.beginPath();
+ ctx.moveTo(0,340);ctx.lineTo(1000,340);ctx.stroke();ctx.setLineDash([]);
+ for(let x=160;x<900;x+=250)drawArrowAt(x,340,0,"#e9e9e9");
 }
 
 function drawArrowAt(x,y,angle,color){
- ctx.save();
- ctx.translate(x,y);
- ctx.rotate(angle);
- ctx.fillStyle=color;
- ctx.beginPath();
- ctx.moveTo(24,0);
- ctx.lineTo(-12,-15);
- ctx.lineTo(-12,-6);
- ctx.lineTo(-30,-6);
- ctx.lineTo(-30,6);
- ctx.lineTo(-12,6);
- ctx.lineTo(-12,15);
- ctx.closePath();
- ctx.fill();
- ctx.restore();
+ ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.fillStyle=color;ctx.beginPath();
+ ctx.moveTo(24,0);ctx.lineTo(-12,-15);ctx.lineTo(-12,-6);ctx.lineTo(-30,-6);
+ ctx.lineTo(-30,6);ctx.lineTo(-12,6);ctx.lineTo(-12,15);ctx.closePath();ctx.fill();ctx.restore();
 }
 
 function drawParking(){
- ctx.fillStyle="#c2c1b9";
- ctx.fillRect(0,100,1000,480);
-
- ctx.fillStyle=roadColor();
- ctx.fillRect(15,115,970,450);
-
- ctx.strokeStyle="#eee";
- ctx.lineWidth=3;
-
+ ctx.fillStyle="#c2c1b9";ctx.fillRect(0,100,1000,480);
+ ctx.fillStyle=roadColor();ctx.fillRect(15,115,970,450);
+ ctx.strokeStyle="#eee";ctx.lineWidth=3;
  for(let x=70;x<950;x+=110){
-  ctx.beginPath();
-  ctx.moveTo(x,130);ctx.lineTo(x,255);
-  ctx.moveTo(x,425);ctx.lineTo(x,550);
-  ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x,130);ctx.lineTo(x,255);ctx.moveTo(x,425);ctx.lineTo(x,550);ctx.stroke();
  }
-
- ctx.beginPath();
- ctx.moveTo(15,340);ctx.lineTo(985,340);
- ctx.stroke();
+ ctx.beginPath();ctx.moveTo(15,340);ctx.lineTo(985,340);ctx.stroke();
 }
 
 function drawVehicle(o){
- ctx.save();
- ctx.translate(o.x,o.y);
- ctx.rotate(o.rot*Math.PI/180);
- ctx.scale(
-  o.w/(defaults[o.type]?.w||o.w),
-  o.h/(defaults[o.type]?.h||o.h)
- );
-
+ ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.rot*Math.PI/180);
+ if(o.type!=="text"){
+  ctx.scale(o.w/(defaults[o.type]?.w||o.w),o.h/(defaults[o.type]?.h||o.h));
+ }
  const w=defaults[o.type]?.w||o.w;
  const h=defaults[o.type]?.h||o.h;
-
  if(o.type==="car"||o.type==="suv")drawCar(o,w,h);
  else if(o.type==="moto")drawMotorcycle(o);
  else if(o.type==="bike")drawBike(o);
@@ -816,372 +581,154 @@ function drawVehicle(o){
  else if(o.type==="arrow")drawArrowObject(o);
  else if(o.type==="impact")drawImpact(o);
  else if(o.type==="text")drawTextObject(o);
-
  ctx.restore();
 
  if(selected===o.id){
-  ctx.save();
-  ctx.translate(o.x,o.y);
-  ctx.rotate(o.rot*Math.PI/180);
-  ctx.strokeStyle="#2499f2";
-  ctx.lineWidth=2;
-  ctx.setLineDash([6,4]);
-  ctx.strokeRect(-o.w/2-5,-o.h/2-5,o.w+10,o.h+10);
-  ctx.setLineDash([]);
-  ctx.restore();
+  ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.rot*Math.PI/180);
+  ctx.strokeStyle="#2499f2";ctx.lineWidth=2;ctx.setLineDash([6,4]);
+  ctx.strokeRect(-o.w/2-5,-o.h/2-5,o.w+10,o.h+10);ctx.setLineDash([]);ctx.restore();
  }
 }
 
 function drawCar(o,w,h){
- ctx.save();
- ctx.translate(-w/2,-h/2);
-
- ctx.fillStyle="rgba(0,0,0,.25)";
- roundedRect(ctx,3,3,w,h,12);
- ctx.fill();
-
+ ctx.save();ctx.translate(-w/2,-h/2);
+ ctx.fillStyle="rgba(0,0,0,.25)";roundedRect(ctx,3,3,w,h,12);ctx.fill();
  ctx.fillStyle="#17191c";
- [[12,3],[w-12,3],[12,h-3],[w-12,h-3]].forEach(p=>{
-  roundedRect(ctx,p[0]-7,p[1]-5,14,10,3);
-  ctx.fill();
- });
-
- ctx.fillStyle=o.color;
- roundedRect(ctx,7,2,w-14,h-4,11);
- ctx.fill();
- ctx.strokeStyle="#30343a";
- ctx.lineWidth=1.5;
- ctx.stroke();
-
- ctx.fillStyle="#536b78";
- roundedRect(ctx,w*.59,7,w*.22,h-14,5);
- ctx.fill();
-
- ctx.fillStyle="#344b59";
- roundedRect(ctx,w*.18,7,w*.18,h-14,4);
- ctx.fill();
-
- ctx.strokeStyle="#26343b";
- ctx.lineWidth=2;
- ctx.beginPath();
- ctx.moveTo(w*.52,5);
- ctx.lineTo(w*.52,h-5);
- ctx.stroke();
-
- ctx.fillStyle="#fff4d1";
- ctx.fillRect(w-10,8,5,7);
- ctx.fillRect(w-10,h-15,5,7);
-
- ctx.fillStyle="#d83b3b";
- ctx.fillRect(5,8,4,7);
- ctx.fillRect(5,h-15,4,7);
-
+ [[12,3],[w-12,3],[12,h-3],[w-12,h-3]].forEach(p=>{roundedRect(ctx,p[0]-7,p[1]-5,14,10,3);ctx.fill()});
+ ctx.fillStyle=o.color;roundedRect(ctx,7,2,w-14,h-4,11);ctx.fill();
+ ctx.strokeStyle="#30343a";ctx.lineWidth=1.5;ctx.stroke();
+ ctx.fillStyle="#536b78";roundedRect(ctx,w*.59,7,w*.22,h-14,5);ctx.fill();
+ ctx.fillStyle="#344b59";roundedRect(ctx,w*.18,7,w*.18,h-14,4);ctx.fill();
+ ctx.strokeStyle="#26343b";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(w*.52,5);ctx.lineTo(w*.52,h-5);ctx.stroke();
+ ctx.fillStyle="#fff4d1";ctx.fillRect(w-10,8,5,7);ctx.fillRect(w-10,h-15,5,7);
+ ctx.fillStyle="#d83b3b";ctx.fillRect(5,8,4,7);ctx.fillRect(5,h-15,4,7);
  ctx.restore();
 }
 
 function drawMotorcycle(o){
- const w=65,h=28;
- ctx.save();
- ctx.translate(-w/2,-h/2);
-
- ctx.fillStyle="#111";
- roundedRect(ctx,4,8,12,12,5);
- ctx.fill();
- roundedRect(ctx,49,8,12,12,5);
- ctx.fill();
-
- ctx.fillStyle=o.color;
- roundedRect(ctx,16,7,34,14,6);
- ctx.fill();
-
- ctx.strokeStyle="#aaa";
- ctx.lineWidth=1.5;
- ctx.stroke();
-
- ctx.fillStyle="#bfc5c9";
- roundedRect(ctx,24,9,18,10,4);
- ctx.fill();
-
- ctx.strokeStyle="#17191c";
- ctx.lineWidth=3;
- ctx.beginPath();
- ctx.moveTo(49,14);
- ctx.lineTo(59,4);
- ctx.moveTo(49,14);
- ctx.lineTo(59,24);
- ctx.stroke();
-
- ctx.fillStyle="#fff0b0";
- ctx.beginPath();
- ctx.arc(59,14,3,0,Math.PI*2);
- ctx.fill();
-
- ctx.restore();
+ const w=65,h=28;ctx.save();ctx.translate(-w/2,-h/2);
+ ctx.fillStyle="#111";roundedRect(ctx,4,8,12,12,5);ctx.fill();roundedRect(ctx,49,8,12,12,5);ctx.fill();
+ ctx.fillStyle=o.color;roundedRect(ctx,16,7,34,14,6);ctx.fill();
+ ctx.strokeStyle="#aaa";ctx.lineWidth=1.5;ctx.stroke();
+ ctx.fillStyle="#bfc5c9";roundedRect(ctx,24,9,18,10,4);ctx.fill();
+ ctx.strokeStyle="#17191c";ctx.lineWidth=3;ctx.beginPath();
+ ctx.moveTo(49,14);ctx.lineTo(59,4);ctx.moveTo(49,14);ctx.lineTo(59,24);ctx.stroke();
+ ctx.fillStyle="#fff0b0";ctx.beginPath();ctx.arc(59,14,3,0,Math.PI*2);ctx.fill();ctx.restore();
 }
 
 function drawBike(o){
- const w=70,h=30;
- ctx.save();
- ctx.translate(-w/2,-h/2);
-
- ctx.strokeStyle="#17191c";
- ctx.lineWidth=2.5;
- ctx.beginPath();
- ctx.arc(9,15,9,0,Math.PI*2);
- ctx.arc(61,15,9,0,Math.PI*2);
- ctx.stroke();
-
- ctx.strokeStyle=o.color;
- ctx.lineWidth=3;
- ctx.beginPath();
- ctx.moveTo(9,15);
- ctx.lineTo(29,15);
- ctx.lineTo(39,5);
- ctx.lineTo(61,15);
- ctx.lineTo(29,15);
- ctx.lineTo(23,5);
- ctx.lineTo(39,5);
- ctx.stroke();
-
- ctx.strokeStyle="#222";
- ctx.lineWidth=2;
- ctx.beginPath();
- ctx.moveTo(39,5);
- ctx.lineTo(44,1);
- ctx.moveTo(23,5);
- ctx.lineTo(17,2);
- ctx.arc(29,15,4,0,Math.PI*2);
- ctx.stroke();
-
- ctx.restore();
+ const w=70,h=30;ctx.save();ctx.translate(-w/2,-h/2);
+ ctx.strokeStyle="#17191c";ctx.lineWidth=2.5;ctx.beginPath();
+ ctx.arc(9,15,9,0,Math.PI*2);ctx.arc(61,15,9,0,Math.PI*2);ctx.stroke();
+ ctx.strokeStyle=o.color;ctx.lineWidth=3;ctx.beginPath();
+ ctx.moveTo(9,15);ctx.lineTo(29,15);ctx.lineTo(39,5);ctx.lineTo(61,15);
+ ctx.lineTo(29,15);ctx.lineTo(23,5);ctx.lineTo(39,5);ctx.stroke();
+ ctx.strokeStyle="#222";ctx.lineWidth=2;ctx.beginPath();
+ ctx.moveTo(39,5);ctx.lineTo(44,1);ctx.moveTo(23,5);ctx.lineTo(17,2);
+ ctx.arc(29,15,4,0,Math.PI*2);ctx.stroke();ctx.restore();
 }
 
 function drawTruck(o){
- const w=145,h=58;
- ctx.save();
- ctx.translate(-w/2,-h/2);
-
+ const w=145,h=58;ctx.save();ctx.translate(-w/2,-h/2);
  ctx.fillStyle="#17191c";
- [8,48].forEach(y=>{
-  roundedRect(ctx,12,y-5,18,10,3);
-  ctx.fill();
-  roundedRect(ctx,116,y-5,18,10,3);
-  ctx.fill();
- });
-
- ctx.fillStyle=o.color;
- roundedRect(ctx,3,3,92,h-6,5);
- ctx.fill();
- ctx.strokeStyle="#444";
- ctx.lineWidth=1.5;
- ctx.stroke();
-
- ctx.fillStyle="#aebcc5";
- roundedRect(ctx,98,5,43,h-10,6);
- ctx.fill();
-
- ctx.fillStyle="#526b79";
- roundedRect(ctx,105,9,27,h-18,4);
- ctx.fill();
-
- ctx.fillStyle="#fff1bd";
- ctx.fillRect(137,9,4,8);
- ctx.fillRect(137,h-17,4,8);
-
- ctx.restore();
+ [8,48].forEach(y=>{roundedRect(ctx,12,y-5,18,10,3);ctx.fill();roundedRect(ctx,116,y-5,18,10,3);ctx.fill()});
+ ctx.fillStyle=o.color;roundedRect(ctx,3,3,92,h-6,5);ctx.fill();
+ ctx.strokeStyle="#444";ctx.lineWidth=1.5;ctx.stroke();
+ ctx.fillStyle="#aebcc5";roundedRect(ctx,98,5,43,h-10,6);ctx.fill();
+ ctx.fillStyle="#526b79";roundedRect(ctx,105,9,27,h-18,4);ctx.fill();
+ ctx.fillStyle="#fff1bd";ctx.fillRect(137,9,4,8);ctx.fillRect(137,h-17,4,8);ctx.restore();
 }
 
 function drawBus(o){
- const w=170,h=58;
- ctx.save();
- ctx.translate(-w/2,-h/2);
-
+ const w=170,h=58;ctx.save();ctx.translate(-w/2,-h/2);
  ctx.fillStyle="#17191c";
- [15,45].forEach(y=>{
-  roundedRect(ctx,15,y-5,18,10,3);
-  ctx.fill();
-  roundedRect(ctx,145,y-5,18,10,3);
-  ctx.fill();
- });
-
- ctx.fillStyle=o.color;
- roundedRect(ctx,3,2,w-6,h-4,10);
- ctx.fill();
- ctx.strokeStyle="#444";
- ctx.stroke();
-
+ [15,45].forEach(y=>{roundedRect(ctx,15,y-5,18,10,3);ctx.fill();roundedRect(ctx,145,y-5,18,10,3);ctx.fill()});
+ ctx.fillStyle=o.color;roundedRect(ctx,3,2,w-6,h-4,10);ctx.fill();
+ ctx.strokeStyle="#444";ctx.stroke();
  ctx.fillStyle="#516b79";
- for(let x=20;x<145;x+=25){
-  roundedRect(ctx,x,7,19,h-14,3);
-  ctx.fill();
- }
-
- ctx.fillStyle="#333";
- ctx.fillRect(12,27,146,3);
-
- ctx.fillStyle="#fff1bd";
- ctx.fillRect(160,10,4,8);
- ctx.fillRect(160,h-18,4,8);
-
- ctx.restore();
+ for(let x=20;x<145;x+=25){roundedRect(ctx,x,7,19,h-14,3);ctx.fill()}
+ ctx.fillStyle="#333";ctx.fillRect(12,27,146,3);
+ ctx.fillStyle="#fff1bd";ctx.fillRect(160,10,4,8);ctx.fillRect(160,h-18,4,8);ctx.restore();
 }
 
 function drawPerson(o){
- ctx.save();
- ctx.translate(-12,-12);
-
- ctx.fillStyle="#e0b58f";
- ctx.beginPath();
- ctx.arc(12,5,5,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle=o.color;
- roundedRect(ctx,6,10,12,12,4);
- ctx.fill();
-
- ctx.strokeStyle="#d9ad87";
- ctx.lineWidth=3;
- ctx.beginPath();
- ctx.moveTo(6,12);
- ctx.lineTo(1,18);
- ctx.moveTo(18,12);
- ctx.lineTo(23,18);
- ctx.stroke();
-
- ctx.strokeStyle="#252a32";
- ctx.lineWidth=4;
- ctx.beginPath();
- ctx.moveTo(9,21);
- ctx.lineTo(7,26);
- ctx.moveTo(15,21);
- ctx.lineTo(17,26);
- ctx.stroke();
-
- ctx.restore();
+ ctx.save();ctx.translate(-12,-12);
+ ctx.fillStyle="#e0b58f";ctx.beginPath();ctx.arc(12,5,5,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle=o.color;roundedRect(ctx,6,10,12,12,4);ctx.fill();
+ ctx.strokeStyle="#d9ad87";ctx.lineWidth=3;ctx.beginPath();
+ ctx.moveTo(6,12);ctx.lineTo(1,18);ctx.moveTo(18,12);ctx.lineTo(23,18);ctx.stroke();
+ ctx.strokeStyle="#252a32";ctx.lineWidth=4;ctx.beginPath();
+ ctx.moveTo(9,21);ctx.lineTo(7,26);ctx.moveTo(15,21);ctx.lineTo(17,26);ctx.stroke();ctx.restore();
 }
 
 function drawCrosswalk(o){
- const w=defaults.crosswalk.w;
- const h=defaults.crosswalk.h;
-
- ctx.fillStyle="rgba(0,0,0,.15)";
- ctx.fillRect(-w/2+3,-h/2+3,w,h);
-
- ctx.fillStyle=o.color;
- const count=7;
-
- for(let i=0;i<count;i++){
-  ctx.fillRect(-w/2+i*(w/count),-h/2,w/count*.62,h);
- }
+ const w=defaults.crosswalk.w;const h=defaults.crosswalk.h;
+ ctx.fillStyle="rgba(0,0,0,.15)";ctx.fillRect(-w/2+3,-h/2+3,w,h);
+ ctx.fillStyle=o.color;const count=7;
+ for(let i=0;i<count;i++)ctx.fillRect(-w/2+i*(w/count),-h/2,w/count*.62,h);
 }
 
 function drawCone(o){
- ctx.fillStyle="#e56d24";
- ctx.beginPath();
- ctx.moveTo(0,-15);
- ctx.lineTo(12,12);
- ctx.lineTo(-12,12);
- ctx.closePath();
- ctx.fill();
-
- ctx.fillStyle="#fff";
- ctx.fillRect(-7,2,14,4);
-
- ctx.fillStyle="#292929";
- ctx.fillRect(-15,12,30,5);
+ ctx.fillStyle="#e56d24";ctx.beginPath();ctx.moveTo(0,-15);ctx.lineTo(12,12);ctx.lineTo(-12,12);ctx.closePath();ctx.fill();
+ ctx.fillStyle="#fff";ctx.fillRect(-7,2,14,4);
+ ctx.fillStyle="#292929";ctx.fillRect(-15,12,30,5);
 }
 
 function drawTrafficLight(o){
- ctx.fillStyle="#17191d";
- roundedRect(ctx,-11,-25,22,50,5);
- ctx.fill();
-
+ ctx.fillStyle="#17191d";roundedRect(ctx,-11,-25,22,50,5);ctx.fill();
  const colors=["#e63d3d","#e5b93c","#35a75d"];
-
- colors.forEach((c,i)=>{
-  ctx.fillStyle=c;
-  ctx.beginPath();
-  ctx.arc(0,-15+i*15,5,0,Math.PI*2);
-  ctx.fill();
- });
+ colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(0,-15+i*15,5,0,Math.PI*2);ctx.fill()});
 }
 
 function drawStop(o){
- ctx.fillStyle=o.color;
- ctx.beginPath();
-
+ ctx.fillStyle=o.color;ctx.beginPath();
  for(let i=0;i<8;i++){
-  const a=Math.PI/8+i*Math.PI/4;
-  const x=Math.cos(a)*24;
-  const y=Math.sin(a)*24;
-  if(i===0)ctx.moveTo(x,y);
-  else ctx.lineTo(x,y);
+  const a=Math.PI/8+i*Math.PI/4;const x=Math.cos(a)*24;const y=Math.sin(a)*24;
+  if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
  }
-
- ctx.closePath();
- ctx.fill();
-
- ctx.strokeStyle="#fff";
- ctx.lineWidth=2;
- ctx.stroke();
-
- ctx.fillStyle="#fff";
- ctx.font="bold 10px Arial";
- ctx.textAlign="center";
- ctx.textBaseline="middle";
- ctx.fillText("PARE",0,1);
+ ctx.closePath();ctx.fill();ctx.strokeStyle="#fff";ctx.lineWidth=2;ctx.stroke();
+ ctx.fillStyle="#fff";ctx.font="bold 10px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("PARE",0,1);
 }
 
 function drawArrowObject(o){
- ctx.fillStyle=o.color;
- ctx.beginPath();
- ctx.moveTo(30,0);
- ctx.lineTo(-10,-22);
- ctx.lineTo(-10,-9);
- ctx.lineTo(-30,-9);
- ctx.lineTo(-30,9);
- ctx.lineTo(-10,9);
- ctx.lineTo(-10,22);
- ctx.closePath();
- ctx.fill();
+ ctx.fillStyle=o.color;ctx.beginPath();ctx.moveTo(30,0);ctx.lineTo(-10,-22);
+ ctx.lineTo(-10,-9);ctx.lineTo(-30,-9);ctx.lineTo(-30,9);ctx.lineTo(-10,9);
+ ctx.lineTo(-10,22);ctx.closePath();ctx.fill();
 }
 
 function drawImpact(o){
- ctx.strokeStyle=o.color;
- ctx.lineWidth=4;
-
- ctx.beginPath();
- ctx.arc(0,0,15,0,Math.PI*2);
- ctx.stroke();
-
- ctx.beginPath();
- ctx.moveTo(-22,0);ctx.lineTo(22,0);
- ctx.moveTo(0,-22);ctx.lineTo(0,22);
- ctx.moveTo(-15,-15);ctx.lineTo(15,15);
- ctx.moveTo(15,-15);ctx.lineTo(-15,15);
- ctx.stroke();
-
- ctx.fillStyle=o.color;
- ctx.beginPath();
- ctx.arc(0,0,5,0,Math.PI*2);
- ctx.fill();
+ ctx.strokeStyle=o.color;ctx.lineWidth=4;ctx.beginPath();ctx.arc(0,0,15,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(-22,0);ctx.lineTo(22,0);ctx.moveTo(0,-22);ctx.lineTo(0,22);
+ ctx.moveTo(-15,-15);ctx.lineTo(15,15);ctx.moveTo(15,-15);ctx.lineTo(-15,15);ctx.stroke();
+ ctx.fillStyle=o.color;ctx.beginPath();ctx.arc(0,0,5,0,Math.PI*2);ctx.fill();
 }
 
 function drawTextObject(o){
- ctx.fillStyle=o.color;
- ctx.font="bold 18px Arial";
+ const fontSize=o.fontSize||22;
+ ctx.save();
+ ctx.fillStyle=o.color||"#ffffff";
+ ctx.font="bold "+fontSize+"px Arial";
  ctx.textAlign="center";
  ctx.textBaseline="middle";
+ ctx.shadowColor="rgba(0,0,0,.45)";
+ ctx.shadowBlur=2;
  ctx.fillText(o.label||"Texto",0,0);
+ ctx.restore();
+}
+
+function measureTextWidth(value,fontSize=22){
+ ctx.save();
+ ctx.font="bold "+fontSize+"px Arial";
+ const width=ctx.measureText(value||"Texto").width+20;
+ ctx.restore();
+ return Math.max(55,Math.ceil(width));
 }
 
 function draw(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
  background();
  objects.forEach(o=>drawVehicle(o));
-
- document.getElementById("count").textContent=
- objects.length+" elemento(s) adicionado(s)";
+ document.getElementById("count").textContent=objects.length+" elemento(s) adicionado(s)";
 }
 
 function getPointer(e){
@@ -1195,103 +742,67 @@ function getPointer(e){
 function hitTest(x,y){
  for(let i=objects.length-1;i>=0;i--){
   const o=objects[i];
-  const dx=x-o.x;
-  const dy=y-o.y;
-  const a=-o.rot*Math.PI/180;
+  const dx=x-o.x;const dy=y-o.y;const a=-o.rot*Math.PI/180;
   const rx=dx*Math.cos(a)-dy*Math.sin(a);
   const ry=dx*Math.sin(a)+dy*Math.cos(a);
-
-  if(Math.abs(rx)<=o.w/2+5&&Math.abs(ry)<=o.h/2+5){
-   return o;
-  }
+  if(Math.abs(rx)<=o.w/2+5&&Math.abs(ry)<=o.h/2+5)return o;
  }
  return null;
 }
 
 canvas.addEventListener("pointerdown",e=>{
  const p=getPointer(e);
-
  if(tool==="select"){
   const o=hitTest(p.x,p.y);
   selected=o?o.id:null;
-
   if(o){
-   saveHistory();
-   dragging=true;
-   dragOffset.x=p.x-o.x;
-   dragOffset.y=p.y-o.y;
+   saveHistory();dragging=true;
+   dragOffset.x=p.x-o.x;dragOffset.y=p.y-o.y;
    canvas.setPointerCapture(e.pointerId);
   }
+  sync();draw();return;
+ }
 
-  sync();
-  draw();
-  return;
+ const d=defaults[tool]||{w:100,h:40,color:"#ffffff"};
+ let label=names[tool];
+
+ if(tool==="text"){
+  if(!pendingText)return;
+  label=pendingText;
+  pendingText=null;
  }
 
  saveHistory();
-
- const d=defaults[tool]||{w:100,h:40,color:"#ffffff"};
-
  const obj={
-  id:idCounter++,
-  type:tool,
-  x:p.x,
-  y:p.y,
-  w:d.w,
-  h:d.h,
-  rot:0,
-  color:d.color,
-  label:tool==="text"?"Texto":names[tool]
+  id:idCounter++,type:tool,x:p.x,y:p.y,
+  w:tool==="text"?measureTextWidth(label,22):d.w,
+  h:tool==="text"?38:d.h,
+  rot:0,color:d.color,label:label,fontSize:22
  };
-
- if(tool==="text"){
-  const t=prompt("Digite o texto que deseja inserir:","Texto");
-  if(t===null){
-   history.pop();
-   return;
-  }
-  obj.label=t;
-  obj.w=Math.max(80,t.length*12);
- }
-
  objects.push(obj);
  selected=obj.id;
-
  setTool("select",document.querySelector('[data-tool="select"]'));
- sync();
- draw();
+ sync();draw();
 });
 
 canvas.addEventListener("pointermove",e=>{
  if(!dragging)return;
-
  const p=getPointer(e);
  const o=objects.find(v=>v.id===selected);
  if(!o)return;
-
  o.x=Math.max(0,Math.min(1000,p.x-dragOffset.x));
  o.y=Math.max(0,Math.min(680,p.y-dragOffset.y));
-
- draw();
- syncPositionOnly();
+ draw();syncPositionOnly();
 });
 
-canvas.addEventListener("pointerup",()=>{
- dragging=false;
-});
-
-canvas.addEventListener("pointercancel",()=>{
- dragging=false;
-});
+canvas.addEventListener("pointerup",()=>{dragging=false});
+canvas.addEventListener("pointercancel",()=>{dragging=false});
 
 function sync(){
  const o=objects.find(v=>v.id===selected);
-
  document.getElementById("properties").style.display=o?"block":"none";
  document.getElementById("noSelection").style.display=o?"none":"block";
-
  if(!o)return;
-
  document.getElementById("selectedInfo").textContent=names[o.type]+" selecionado";
  document.getElementById("objLabel").value=o.label||"";
  document.getElementById("posX").value=Math.round(o.x);
@@ -1306,107 +817,68 @@ function sync(){
 function syncPositionOnly(){
  const o=objects.find(v=>v.id===selected);
  if(!o)return;
-
  document.getElementById("posX").value=Math.round(o.x);
  document.getElementById("posY").value=Math.round(o.y);
 }
 
 function updateSelected(k,v){
- const o=objects.find(v=>v.id===selected);
+ const o=objects.find(item=>item.id===selected);
  if(!o)return;
+ if(!(k==="label"&&o.type==="text"))saveHistory();
+ if(k==="w"||k==="h")o[k]=Math.max(10,Math.min(600,Number(v)||10));
+ else o[k]=v;
 
- saveHistory();
-
- if(k==="w"||k==="h"){
-  o[k]=Math.max(10,Math.min(600,v||10));
- }else{
-  o[k]=v;
+ if(k==="label"&&o.type==="text"){
+  o.w=measureTextWidth(o.label,o.fontSize||22);
+  o.h=Math.max(38,(o.fontSize||22)+16);
+  document.getElementById("objW").value=Math.round(o.w);
+  document.getElementById("objH").value=Math.round(o.h);
  }
-
- if(k==="rot"){
-  document.getElementById("rotationValue").textContent=v+"°";
- }
-
+ if(k==="rot")document.getElementById("rotationValue").textContent=v+"°";
  draw();
 }
 
 function rotateSelected(n){
  const o=objects.find(v=>v.id===selected);
  if(!o)return;
-
- saveHistory();
- o.rot=(o.rot+n+360)%360;
- sync();
- draw();
+ saveHistory();o.rot=(o.rot+n+360)%360;sync();draw();
 }
 
 function deleteSelected(){
  const index=objects.findIndex(v=>v.id===selected);
  if(index<0)return;
-
- saveHistory();
- objects.splice(index,1);
- selected=null;
- draw();
- sync();
+ saveHistory();objects.splice(index,1);selected=null;draw();sync();
 }
 
 function duplicateSelected(){
  const o=objects.find(v=>v.id===selected);
  if(!o)return;
-
  saveHistory();
-
  const copy={...o,id:idCounter++,x:o.x+35,y:o.y+35};
- objects.push(copy);
- selected=copy.id;
-
- draw();
- sync();
+ objects.push(copy);selected=copy.id;draw();sync();
 }
 
 function changeLayer(direction){
  const i=objects.findIndex(v=>v.id===selected);
  if(i<0)return;
-
  const j=i+direction;
  if(j<0||j>=objects.length)return;
-
  saveHistory();
  [objects[i],objects[j]]=[objects[j],objects[i]];
-
  draw();
 }
 
 function novoCroqui(){
  if(!confirm("Deseja realmente limpar todos os elementos?"))return;
-
- saveHistory();
- objects=[];
- selected=null;
- draw();
- sync();
+ saveHistory();objects=[];selected=null;draw();sync();
 }
 
 function salvarProjeto(){
- const data={
-  version:1,
-  road:road,
-  roadColor:roadColor(),
-  objects:objects,
-  idCounter:idCounter
- };
-
- const blob=new Blob(
-  [JSON.stringify(data,null,2)],
-  {type:"application/json"}
- );
-
+ const data={version:1,road:road,roadColor:roadColor(),objects:objects,idCounter:idCounter};
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
  const url=URL.createObjectURL(blob);
  const a=document.createElement("a");
- a.href=url;
- a.download="croqui_maxxiseg.json";
- a.click();
+ a.href=url;a.download="croqui_maxxiseg.json";a.click();
  URL.revokeObjectURL(url);
 }
 
@@ -1417,87 +889,54 @@ function carregarProjeto(){
 function abrirArquivo(event){
  const file=event.target.files[0];
  if(!file)return;
-
  const reader=new FileReader();
-
  reader.onload=()=>{
   try{
    const data=JSON.parse(reader.result);
-
-   if(!Array.isArray(data.objects)){
-    throw new Error("Arquivo inválido");
-   }
-
+   if(!Array.isArray(data.objects))throw new Error("Arquivo inválido");
    saveHistory();
-
-   objects=data.objects;
-   road=data.road||"horizontal";
-   idCounter=data.idCounter||1;
-
+   objects=data.objects;road=data.road||"horizontal";idCounter=data.idCounter||1;
    document.getElementById("roadType").value=road;
-
-   if(data.roadColor){
-    document.getElementById("roadColor").value=data.roadColor;
-   }
-
-   selected=null;
-   draw();
-   sync();
-
+   if(data.roadColor)document.getElementById("roadColor").value=data.roadColor;
+   selected=null;draw();sync();
   }catch(err){
    alert("Não foi possível abrir esse arquivo. Verifique se é um projeto válido.");
   }
  };
-
  reader.readAsText(file);
  event.target.value="";
 }
 
 function exportarPNG(){
- const old=selected;
- selected=null;
- draw();
-
+ const old=selected;selected=null;draw();
  const a=document.createElement("a");
- a.download="croqui_maxxiseg.png";
- a.href=canvas.toDataURL("image/png");
- a.click();
-
- selected=old;
- draw();
+ a.download="croqui_maxxiseg.png";a.href=canvas.toDataURL("image/png");a.click();
+ selected=old;draw();
 }
 
-function resetZoom(){
- draw();
-}
+function resetZoom(){draw()}
 
 window.addEventListener("keydown",e=>{
  if(e.key==="Delete"||e.key==="Backspace"){
   if(document.activeElement.tagName==="INPUT")return;
   deleteSelected();
  }
-
- if(e.ctrlKey&&e.key.toLowerCase()==="z"){
-  e.preventDefault();
-  undo();
- }
-
- if(e.ctrlKey&&e.key.toLowerCase()==="d"){
-  e.preventDefault();
-  duplicateSelected();
- }
-
+ if(e.ctrlKey&&e.key.toLowerCase()==="z"){e.preventDefault();undo()}
+ if(e.ctrlKey&&e.key.toLowerCase()==="d"){e.preventDefault();duplicateSelected()}
  if(e.key==="Escape"){
+  const modal=document.getElementById("textDialog");
+  if(modal.style.display==="flex"){
+   cancelarTexto();
+   return;
+  }
   selected=null;
   setTool("select",document.querySelector('[data-tool="select"]'));
-  sync();
-  draw();
+  sync();draw();
  }
 });
 
 draw();
 sync();
 </script>
-
 </body>
 </html>
