@@ -1,333 +1,1503 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sinistro Maxxiseg</title>
+<title>MAXXISEG | Editor de Croqui</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f2f4f8;color:#182235;font-family:Arial,sans-serif}
-header{background:#17152b;color:#fff;padding:19px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-header h1{margin:0;font-size:21px;letter-spacing:.5px}header p{margin:5px 0 0;color:#c7c3dd;font-size:12px}
-button{border:0;border-radius:8px;padding:10px 13px;font-weight:700;cursor:pointer}.primary{background:#6546d7;color:#fff}.light{background:#eeeaff;color:#5434c5}.danger{background:#ffeded;color:#b52e39}.outline{background:#fff;border:1px solid #dce1eb;color:#263247}
-main{max-width:1600px;margin:auto;padding:16px;display:grid;grid-template-columns:245px minmax(350px,1fr) 250px;gap:14px}
-.panel{background:#fff;border:1px solid #e3e8f0;border-radius:12px;padding:14px;min-width:0}.panel h2{font-size:14px;margin:0 0 10px}.muted{font-size:11px;color:#7b8798;line-height:1.5}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:7px}.tool{display:flex;align-items:center;gap:7px;text-align:left;background:#f7f8fb;border:1px solid #e4e8ef;color:#27334a;min-height:52px;padding:8px;font-size:11px}.tool svg{width:33px;height:26px;flex:none}.tool.active{background:#f0edff;border:2px solid #6546d7;color:#4b32ae}
-.field{margin:11px 0}.field label{display:block;font-size:11px;font-weight:bold;color:#667085;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:9px;border:1px solid #dce2ed;border-radius:7px;font:13px Arial}.field textarea{min-height:75px;resize:vertical}
-.workspace{min-width:0}.canvas-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 2px 9px;font-size:13px;font-weight:bold}.canvas-head span{font-size:11px;color:#7b8798;font-weight:normal}
-.canvas-box{background:white;border:1px solid #e3e8f0;border-radius:12px;padding:9px}canvas{display:block;width:100%;height:auto;aspect-ratio:1000/680;border-radius:7px;touch-action:none;cursor:crosshair;background:#f5f6f8}
-.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.actions button{flex:1;min-width:90px}.divider{border:0;border-top:1px solid #e9edf3;margin:14px 0}
-#selectedInfo{font-size:12px;color:#596579;line-height:1.5}.right-panel .small{font-size:10px;color:#8792a5;line-height:1.45}
-footer{text-align:center;color:#8b95a5;font-size:10px;padding:0 12px 18px}
-@media(max-width:1000px){main{grid-template-columns:220px minmax(0,1fr)}.right-panel{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:15px}}
-@media(max-width:650px){main{display:flex;flex-direction:column;padding:9px}.right-panel{display:block}.canvas-box{padding:4px}header{padding:14px}}
+:root{
+ --blue:#0878d1;
+ --blue-light:#2499f2;
+ --navy:#071a30;
+ --panel:#10243a;
+ --border:#244463;
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:#071321;
+ color:#f3f7fc;
+ font-family:Arial,sans-serif;
+}
+
+header{
+ min-height:68px;
+ background:linear-gradient(110deg,#071a30,#0b3156);
+ border-bottom:2px solid var(--blue);
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:12px 22px;
+}
+
+header h1{
+ font-size:20px;
+ letter-spacing:2.5px;
+ margin:0;
+}
+
+header span{color:#36a8ff}
+
+.header-sub{
+ font-size:11px;
+ color:#9bb0c5;
+ letter-spacing:1px;
+}
+
+main{
+ display:grid;
+ grid-template-columns:235px minmax(0,1fr) 250px;
+ gap:14px;
+ padding:14px;
+ max-width:1700px;
+ margin:auto;
+}
+
+.panel{
+ background:linear-gradient(145deg,#10243a,#0c1c30);
+ border:1px solid #244463;
+ border-radius:12px;
+ padding:14px;
+ min-width:0;
+ box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+h3{
+ font-size:12px;
+ color:#55b5ff;
+ text-transform:uppercase;
+ letter-spacing:1px;
+ margin:4px 0 12px;
+}
+
+hr{
+ border:0;
+ border-top:1px solid #244463;
+ margin:16px 0;
+}
+
+button,input,select{font:inherit}
+
+button{
+ background:#19344f;
+ color:#eee;
+ border:1px solid #315574;
+ padding:9px 10px;
+ border-radius:8px;
+ cursor:pointer;
+ transition:.2s;
+}
+
+button:hover{
+ background:#24517a;
+ border-color:#39aaff;
+ transform:translateY(-1px);
+}
+
+button.active,button.primary{
+ background:linear-gradient(135deg,#0878d1,#0756a5);
+ border-color:#38a9ff;
+ color:white;
+}
+
+button.danger{
+ background:#652c39;
+ border-color:#93404d;
+}
+
+.tools{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:7px;
+}
+
+.tools button{
+ font-size:12px;
+ min-height:46px;
+ font-weight:500;
+}
+
+select,input{
+ width:100%;
+ background:#081727;
+ color:#eee;
+ border:1px solid #31516e;
+ border-radius:8px;
+ padding:9px;
+ margin:5px 0 11px;
+}
+
+input:focus,select:focus{
+ outline:none;
+ border-color:#2499f2;
+ box-shadow:0 0 0 2px rgba(36,153,242,.15);
+}
+
+input[type=color]{
+ height:38px;
+ padding:3px;
+}
+
+input[type=range]{padding:0}
+
+label{
+ font-size:12px;
+ color:#b9cadd;
+ display:block;
+}
+
+.row{display:flex;gap:7px}
+.row>*{flex:1;min-width:0}
+
+.actions{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:7px;
+}
+
+.workspace{
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+
+.toolbar{
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+}
+
+.toolbar button{
+ font-size:12px;
+ background:#173653;
+}
+
+.canvas-wrap{
+ background:#10243a;
+ border:1px solid #244463;
+ border-radius:12px;
+ padding:10px;
+ overflow:auto;
+ box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+canvas{
+ display:block;
+ width:100%;
+ height:auto;
+ background:#d8d8d0;
+ border-radius:5px;
+ touch-action:none;
+}
+
+#count{
+ font-size:12px;
+ color:#55b5ff;
+}
+
+.hint{
+ font-size:11px;
+ color:#9bb0c5;
+ line-height:1.6;
+}
+
+#properties{display:none}
+
+@media(max-width:1050px){
+ main{grid-template-columns:190px minmax(0,1fr)}
+ .right-panel{grid-column:1/-1}
+}
+
+@media(max-width:650px){
+ main{grid-template-columns:1fr;padding:8px}
+ .right-panel{grid-column:auto}
+ header{padding:12px}
+ .header-sub{display:none}
+}
 </style>
 </head>
+
 <body>
+
 <header>
- <div><h1>SINISTRO MAXXISEG</h1><p>Montagem técnica de croquis de acidentes de trânsito</p></div>
- <div style="display:flex;gap:8px;flex-wrap:wrap">
-  <button class="outline" onclick="novoCroqui()">Novo croqui</button>
-  <button class="outline" onclick="salvarProjeto()">Salvar projeto</button>
-  <button class="primary" onclick="exportarPNG()">Exportar PNG</button>
- </div>
+ <h1>MAXXISEG <span>│ CROQUI</span></h1>
+ <div class="header-sub">EDITOR DE CENÁRIOS DE SINISTRO</div>
 </header>
+
 <main>
- <aside class="panel">
-  <h2>Elementos do croqui</h2>
-  <p class="muted">Escolha um elemento e clique na área do desenho. Os veículos são ilustrados vistos de cima.</p>
-  <div class="tools" id="tools">
-   <button class="tool active" data-type="car"><svg viewBox="0 0 60 40"><use href="#carShape"/></svg>Carro</button>
-   <button class="tool" data-type="pickup"><svg viewBox="0 0 60 40"><use href="#pickupShape"/></svg>Utilitário</button>
-   <button class="tool" data-type="bus"><svg viewBox="0 0 60 40"><use href="#busShape"/></svg>Ônibus</button>
-   <button class="tool" data-type="truck"><svg viewBox="0 0 60 40"><use href="#truckShape"/></svg>Caminhão</button>
-   <button class="tool" data-type="motorcycle"><svg viewBox="0 0 60 40"><use href="#motoShape"/></svg>Moto</button>
-   <button class="tool" data-type="bike"><svg viewBox="0 0 60 40"><use href="#bikeShape"/></svg>Bicicleta</button>
-   <button class="tool" data-type="traffic"><svg viewBox="0 0 60 40"><use href="#trafficShape"/></svg>Semáforo</button>
-   <button class="tool" data-type="stop"><svg viewBox="0 0 60 40"><use href="#stopShape"/></svg>Placa PARE</button>
-   <button class="tool" data-type="sign"><svg viewBox="0 0 60 40"><use href="#signShape"/></svg>Placa aviso</button>
-   <button class="tool" data-type="person"><svg viewBox="0 0 60 40"><use href="#personShape"/></svg>Pedestre</button>
-   <button class="tool" data-type="cone"><svg viewBox="0 0 60 40"><use href="#coneShape"/></svg>Cone</button>
-   <button class="tool" data-type="impact"><svg viewBox="0 0 60 40"><use href="#impactShape"/></svg>Colisão</button>
-   <button class="tool" data-type="arrow"><svg viewBox="0 0 60 40"><use href="#arrowShape"/></svg>Sentido</button>
-   <button class="tool" data-type="text"><svg viewBox="0 0 60 40"><text x="30" y="29" text-anchor="middle" font-size="25" font-weight="bold" fill="#344054">T</text></svg>Texto</button>
-  </div>
-  <hr class="divider">
-  <h2>Cenário</h2>
-  <div class="field"><label>Modelo de via</label><select id="background" onchange="draw()"><option value="cross">Cruzamento</option><option value="straight">Avenida / via reta</option><option value="road">Rua simples</option><option value="parking">Estacionamento</option><option value="blank">Fundo livre</option></select></div>
-  <div class="field"><label>Grade de alinhamento</label><select id="grid" onchange="draw()"><option value="yes">Exibir grade</option><option value="no">Ocultar grade</option></select></div>
-  <p class="muted">Dica: clique em um veículo já colocado para selecioná-lo. Arraste para mover e use os controles para girar, redimensionar ou excluir.</p>
- </aside>
- <section class="workspace">
-  <div class="canvas-head">Área de montagem <span id="count">0 elementos</span></div>
-  <div class="canvas-box"><canvas id="scene" width="1000" height="680"></canvas></div>
-  <div class="actions">
-   <button class="light" onclick="rotateSelected(-15)">↶ Girar -15°</button>
-   <button class="light" onclick="rotateSelected(15)">↷ Girar +15°</button>
-   <button class="outline" onclick="duplicateSelected()">Duplicar</button>
-   <button class="danger" onclick="deleteSelected()">Excluir</button>
-   <button class="outline" onclick="undo()">Desfazer</button>
-  </div>
- </section>
- <aside class="panel right-panel">
-  <div>
-   <h2>Informações do sinistro</h2>
-   <div class="field"><label>Número do sinistro</label><input id="claim" placeholder="Ex.: 2026-000123"></div>
-   <div class="field"><label>Data e horário</label><input id="date" type="datetime-local"></div>
-   <div class="field"><label>Local da ocorrência</label><input id="place" placeholder="Rua, número, cidade"></div>
-   <div class="field"><label>Observações</label><textarea id="notes" placeholder="Dinâmica informada da ocorrência..."></textarea></div>
-  </div>
-  <div>
-   <hr class="divider"><h2>Elemento selecionado</h2>
-   <div id="selectedInfo">Nenhum elemento selecionado.</div>
-   <div id="properties" style="display:none">
-    <div class="field"><label>Identificação / legenda</label><input id="objLabel" oninput="updateSelected('label',this.value)"></div>
-    <div class="field"><label>Cor do veículo / elemento</label><input id="objColor" type="color" value="#3976bd" oninput="updateSelected('color',this.value)"></div>
-    <div class="field"><label>Tamanho</label><input id="objSize" type="range" min=".65" max="1.6" step=".05" value="1" oninput="updateSelected('scale',+this.value)"></div>
-    <div class="field"><label>Ângulo em graus</label><input id="objAngle" type="number" oninput="updateSelected('angle',+this.value)"></div>
+
+<aside class="panel">
+ <h3>1. Cenário da via</h3>
+
+ <label>Modelo de rua</label>
+ <select id="roadType" onchange="changeRoad()">
+  <option value="horizontal">Rua horizontal</option>
+  <option value="vertical">Rua vertical</option>
+  <option value="twoway">Rua de mão dupla</option>
+  <option value="cross">Cruzamento de 4 vias</option>
+  <option value="tdown">Cruzamento em T - saída inferior</option>
+  <option value="tup">Cruzamento em T - saída superior</option>
+  <option value="tleft">Cruzamento em T - saída esquerda</option>
+  <option value="tright">Cruzamento em T - saída direita</option>
+  <option value="corner">Esquina em L</option>
+  <option value="roundabout">Rotatória</option>
+  <option value="avenue">Avenida com canteiro central</option>
+  <option value="oneway">Rua de sentido único</option>
+  <option value="parking">Estacionamento</option>
+  <option value="empty">Fundo livre</option>
+ </select>
+
+ <label>Cor do asfalto</label>
+ <input type="color" id="roadColor" value="#55585d" onchange="draw()">
+
+ <hr>
+
+ <h3>2. Elementos</h3>
+ <div class="tools">
+  <button class="active" data-tool="select" onclick="setTool('select',this)">↖ Selecionar</button>
+  <button data-tool="car" onclick="setTool('car',this)">Carro</button>
+  <button data-tool="suv" onclick="setTool('suv',this)">Utilitário</button>
+  <button data-tool="moto" onclick="setTool('moto',this)">Motocicleta</button>
+  <button data-tool="bike" onclick="setTool('bike',this)">Bicicleta</button>
+  <button data-tool="truck" onclick="setTool('truck',this)">Caminhão</button>
+  <button data-tool="bus" onclick="setTool('bus',this)">Ônibus</button>
+  <button data-tool="person" onclick="setTool('person',this)">Pedestre</button>
+  <button data-tool="crosswalk" onclick="setTool('crosswalk',this)">Faixa pedestre</button>
+  <button data-tool="cone" onclick="setTool('cone',this)">Cone</button>
+  <button data-tool="trafficlight" onclick="setTool('trafficlight',this)">Semáforo</button>
+  <button data-tool="stop" onclick="setTool('stop',this)">Placa PARE</button>
+  <button data-tool="arrow" onclick="setTool('arrow',this)">Seta</button>
+  <button data-tool="impact" onclick="setTool('impact',this)">Ponto de impacto</button>
+  <button data-tool="text" onclick="setTool('text',this)">Texto</button>
+ </div>
+
+ <p class="hint">
+  Selecione um elemento e clique no cenário para adicioná-lo. Depois, arraste para movimentar.
+ </p>
+
+ <hr>
+
+ <h3>3. Projeto</h3>
+ <div class="actions">
+  <button onclick="undo()">↶ Desfazer</button>
+  <button onclick="duplicateSelected()">Duplicar</button>
+  <button onclick="deleteSelected()" class="danger">Excluir</button>
+  <button onclick="novoCroqui()">Limpar tudo</button>
+  <button onclick="salvarProjeto()">Salvar JSON</button>
+  <button onclick="carregarProjeto()">Abrir JSON</button>
+  <button class="primary" style="grid-column:1/-1" onclick="exportarPNG()">Exportar imagem PNG</button>
+ </div>
+
+ <input type="file" id="fileInput" accept=".json" style="display:none" onchange="abrirArquivo(event)">
+</aside>
+
+<section class="workspace">
+
+ <div class="toolbar">
+  <button onclick="rotateSelected(-15)">↶ Girar -15°</button>
+  <button onclick="rotateSelected(15)">↷ Girar +15°</button>
+  <button onclick="changeLayer(1)">Trazer para frente</button>
+  <button onclick="changeLayer(-1)">Enviar para trás</button>
+  <button onclick="resetZoom()">Centralizar</button>
+ </div>
+
+ <div class="canvas-wrap">
+  <canvas id="canvas" width="1000" height="680"></canvas>
+ </div>
+
+ <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <span id="count">0 elemento(s) adicionado(s)</span>
+  <span class="hint">Área de desenho: 1000 × 680 px</span>
+ </div>
+
+</section>
+
+<aside class="panel right-panel">
+ <h3>Propriedades do elemento</h3>
+
+ <div id="noSelection" class="hint">
+  Nenhum elemento selecionado.<br><br>
+  Clique em um elemento do croqui para editar suas propriedades.
+ </div>
+
+ <div id="properties">
+
+  <label>Identificação</label>
+  <div id="selectedInfo" style="font-size:13px;margin:4px 0 12px;color:#55b5ff"></div>
+
+  <label>Texto / identificação</label>
+  <input id="objLabel" type="text" placeholder="Ex.: Veículo A" oninput="updateSelected('label',this.value)">
+
+  <div class="row">
+   <div>
+    <label>Posição X</label>
+    <input id="posX" type="number" onchange="updateSelected('x',+this.value)">
    </div>
-   <p class="small">Croqui ilustrativo para apoio ao atendimento. Confira a posição e a dinâmica com as informações da ocorrência.</p>
+   <div>
+    <label>Posição Y</label>
+    <input id="posY" type="number" onchange="updateSelected('y',+this.value)">
+   </div>
   </div>
- </aside>
+
+  <div class="row">
+   <div>
+    <label>Largura</label>
+    <input id="objW" type="number" min="10" max="600" onchange="updateSelected('w',+this.value)">
+   </div>
+   <div>
+    <label>Altura</label>
+    <input id="objH" type="number" min="10" max="600" onchange="updateSelected('h',+this.value)">
+   </div>
+  </div>
+
+  <label>Rotação</label>
+  <input id="objRot" type="range" min="0" max="359" oninput="updateSelected('rot',+this.value)">
+  <div style="display:flex;justify-content:space-between;font-size:11px;color:#aaa">
+   <span>0°</span><span id="rotationValue">0°</span><span>359°</span>
+  </div>
+
+  <label>Cor principal</label>
+  <input id="objColor" type="color" onchange="updateSelected('color',this.value)">
+
+  <div class="actions">
+   <button onclick="rotateSelected(-90)">-90°</button>
+   <button onclick="rotateSelected(90)">+90°</button>
+   <button onclick="duplicateSelected()">Duplicar</button>
+   <button class="danger" onclick="deleteSelected()">Excluir</button>
+  </div>
+ </div>
+
+ <hr>
+
+ <h3>Orientações</h3>
+ <p class="hint">
+  • Clique para inserir elementos.<br>
+  • Arraste para mudar a posição.<br>
+  • Use os controles para girar.<br>
+  • A faixa de pedestres é adicionada separadamente.<br>
+  • Exporte o resultado em PNG.
+ </p>
+</aside>
+
 </main>
-<footer>SINISTRO MAXXISEG • Ferramenta auxiliar de elaboração de croquis • Não substitui perícia ou boletim de ocorrência.</footer>
 
-<!-- Biblioteca de desenhos vetoriais usados nos botões -->
-<svg width="0" height="0" style="position:absolute">
- <defs>
-  <g id="carShape"><rect x="9" y="3" width="42" height="34" rx="12" fill="#3976bd" stroke="#172536" stroke-width="2"/><path d="M16 10 Q30 5 44 10 L42 17 H18Z" fill="#c9e6f6"/><path d="M18 25 H42 L44 32 H16Z" fill="#c9e6f6"/><rect x="5" y="9" width="5" height="9" rx="2" fill="#202936"/><rect x="50" y="9" width="5" height="9" rx="2" fill="#202936"/><rect x="5" y="25" width="5" height="9" rx="2" fill="#202936"/><rect x="50" y="25" width="5" height="9" rx="2" fill="#202936"/></g>
-  <g id="pickupShape"><rect x="8" y="3" width="44" height="34" rx="9" fill="#3976bd" stroke="#172536" stroke-width="2"/><rect x="16" y="5" width="28" height="12" rx="3" fill="#c9e6f6"/><rect x="15" y="21" width="30" height="13" rx="2" fill="#8b929c" stroke="#273448"/><rect x="4" y="9" width="5" height="9" rx="2" fill="#202936"/><rect x="51" y="9" width="5" height="9" rx="2" fill="#202936"/></g>
-  <g id="busShape"><rect x="7" y="1" width="46" height="38" rx="8" fill="#e0b63d" stroke="#263344" stroke-width="2"/><rect x="12" y="5" width="36" height="8" rx="2" fill="#b9dbea"/><path d="M12 17 H48 V31 H12Z" fill="#b9dbea"/><path d="M20 17 V31 M30 17 V31 M40 17 V31" stroke="#536879" stroke-width="1.5"/><rect x="4" y="8" width="4" height="9" rx="1" fill="#202936"/><rect x="52" y="8" width="4" height="9" rx="1" fill="#202936"/></g>
-  <g id="truckShape"><rect x="4" y="3" width="34" height="34" rx="3" fill="#aeb8c5" stroke="#263344" stroke-width="2"/><path d="M38 13 H49 L57 22 V34 H38Z" fill="#3976bd" stroke="#263344" stroke-width="2"/><path d="M43 16 H49 L54 23 H43Z" fill="#c9e6f6"/></g>
-  <g id="motoShape"><circle cx="12" cy="30" r="7" fill="#222"/><circle cx="48" cy="30" r="7" fill="#222"/><path d="M12 30 L23 13 L39 13 L48 30 L30 30Z" fill="none" stroke="#3976bd" stroke-width="4"/><path d="M23 13 L30 30 L39 13" stroke="#202936" stroke-width="3" fill="none"/></g>
-  <g id="bikeShape"><circle cx="12" cy="27" r="10" fill="none" stroke="#222" stroke-width="2"/><circle cx="48" cy="27" r="10" fill="none" stroke="#222" stroke-width="2"/><path d="M12 27 L25 12 L34 27 L12 27 L48 27 L34 27 L39 12" fill="none" stroke="#3976bd" stroke-width="3"/></g>
-  <g id="trafficShape"><rect x="18" y="2" width="24" height="36" rx="5" fill="#252d38"/><circle cx="30" cy="10" r="5" fill="#e34b4b"/><circle cx="30" cy="20" r="5" fill="#e9bd43"/><circle cx="30" cy="30" r="5" fill="#3ca66b"/></g>
-  <g id="stopShape"><path d="M18 3 H42 L57 18 V30 L42 37 H18 L3 30 V18Z" fill="#d94747" stroke="#992a2a" stroke-width="2"/><text x="30" y="25" text-anchor="middle" font-size="10" fill="white" font-weight="bold">PARE</text></g>
-  <g id="signShape"><path d="M30 2 L56 37 H4Z" fill="#f2c94c" stroke="#876515" stroke-width="2"/><text x="30" y="29" text-anchor="middle" font-size="23" font-weight="bold">!</text></g>
-  <g id="personShape"><circle cx="30" cy="8" r="6" fill="#e2b993"/><path d="M30 15 V28 M30 18 L17 25 M30 18 L43 25 M30 28 L20 39 M30 28 L40 39" stroke="#315d9b" stroke-width="5" stroke-linecap="round"/></g>
-  <g id="coneShape"><path d="M30 3 L48 35 H12Z" fill="#f07832" stroke="#a84616" stroke-width="2"/><path d="M20 24 H40" stroke="white" stroke-width="5"/></g>
-  <g id="impactShape"><path d="M30 2 L36 14 L49 7 L45 21 L59 25 L45 31 L51 43 L37 39 L30 54 L23 39 L9 45 L15 31 L1 25 L15 20 L10 7 L24 14Z" fill="#f5c542" stroke="#d65b36" stroke-width="2"/></g>
-  <g id="arrowShape"><path d="M4 14 H36 V3 L57 20 L36 37 V26 H4Z" fill="#3976bd"/></g>
- </defs>
-</svg>
 <script>
-const canvas=document.getElementById('scene');
-const ctx=canvas.getContext('2d');
-let objects=[],selected=null,activeType='car',history=[],dragging=null,dragOffset={x:0,y:0};
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
 
-const names={car:'Carro',pickup:'Utilitário',bus:'Ônibus',truck:'Caminhão',motorcycle:'Motocicleta',bike:'Bicicleta',traffic:'Semáforo',stop:'Placa PARE',sign:'Placa de advertência',person:'Pedestre',cone:'Cone',impact:'Ponto de colisão',arrow:'Seta de direção',text:'Texto'};
-const sizes={car:[54,105],pickup:[58,112],bus:[65,155],truck:[75,155],motorcycle:[30,75],bike:[48,85],traffic:[34,45],stop:[48,48],sign:[48,48],person:[35,55],cone:[34,42],impact:[45,45],arrow:[75,35],text:[100,40]};
-const colors={car:'#3976bd',pickup:'#3976bd',bus:'#e0b63d',truck:'#3976bd',motorcycle:'#d94b4b',bike:'#303846',traffic:'#252d38',stop:'#d94747',sign:'#f2c94c',person:'#315d9b',cone:'#f07832',impact:'#f5c542',arrow:'#3976bd',text:'#344054'};
+let objects=[];
+let selected=null;
+let tool="select";
+let road="horizontal";
+let dragging=false;
+let dragOffset={x:0,y:0};
+let history=[];
+let idCounter=1;
 
-document.getElementById('tools').addEventListener('click',e=>{
- const b=e.target.closest('button[data-type]');if(!b)return;
- activeType=b.dataset.type;
- document.querySelectorAll('.tool').forEach(x=>x.classList.toggle('active',x===b));
-});
+const names={
+ car:"Carro",suv:"Utilitário",moto:"Motocicleta",
+ bike:"Bicicleta",truck:"Caminhão",bus:"Ônibus",
+ person:"Pedestre",crosswalk:"Faixa de pedestres",
+ cone:"Cone",trafficlight:"Semáforo",stop:"Placa PARE",
+ arrow:"Seta",impact:"Ponto de impacto",text:"Texto"
+};
 
-function snapshot(){history.push(JSON.stringify(objects));if(history.length>40)history.shift()}
-function pointerPos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
-function hit(o,x,y){const [w,h]=sizes[o.type];const dx=x-o.x,dy=y-o.y,a=-o.angle*Math.PI/180;const rx=dx*Math.cos(a)-dy*Math.sin(a),ry=dx*Math.sin(a)+dy*Math.cos(a);return Math.abs(rx)<w*o.scale/2+8&&Math.abs(ry)<h*o.scale/2+8}
+const defaults={
+ car:{w:90,h:48,color:"#e9e9e9"},
+ suv:{w:105,h:53,color:"#d7dce2"},
+ moto:{w:65,h:28,color:"#24252a"},
+ bike:{w:70,h:30,color:"#202126"},
+ truck:{w:145,h:58,color:"#d6d6d6"},
+ bus:{w:170,h:58,color:"#e6c85b"},
+ person:{w:25,h:25,color:"#2877c7"},
+ crosswalk:{w:150,h:70,color:"#f4f4f4"},
+ cone:{w:25,h:30,color:"#f07828"},
+ trafficlight:{w:28,h:55,color:"#292929"},
+ stop:{w:48,h:48,color:"#d52f36"},
+ arrow:{w:65,h:50,color:"#f8f8f8"},
+ impact:{w:38,h:38,color:"#e42d38"},
+ text:{w:130,h:35,color:"#ffffff"}
+};
 
-canvas.addEventListener('pointerdown',e=>{
- const p=pointerPos(e);
- const found=[...objects].reverse().find(o=>hit(o,p.x,p.y));
- if(found){selected=found.id;dragging=found.id;dragOffset={x:p.x-found.x,y:p.y-found.y};sync();draw();canvas.setPointerCapture(e.pointerId)}
- else{
-  snapshot();
-  const label=activeType==='text'?(prompt('Digite o texto do croqui:')||'Texto'):prompt('Identificação do elemento (opcional):')||'';
-  if(activeType==='text'&&!label)return;
-  const o={id:Date.now()+Math.random(),type:activeType,x:p.x,y:p.y,angle:0,scale:1,color:colors[activeType],label};
-  objects.push(o);selected=o.id;sync();draw();
- }
-});
-canvas.addEventListener('pointermove',e=>{
- if(!dragging)return;
- const p=pointerPos(e),o=objects.find(v=>v.id===dragging);
- if(o){o.x=p.x-dragOffset.x;o.y=p.y-dragOffset.y;draw()}
-});
-canvas.addEventListener('pointerup',()=>{dragging=null});
-canvas.addEventListener('pointercancel',()=>{dragging=null});
-
-function road(x,y,w,h){
- ctx.fillStyle='#555b65';ctx.fillRect(x,y,w,h);
- ctx.strokeStyle='#f8f8f8';ctx.lineWidth=3;ctx.setLineDash([25,19]);ctx.beginPath();
- if(w>h){ctx.moveTo(x,y+h/2);ctx.lineTo(x+w,y+h/2)}
- else{ctx.moveTo(x+w/2,y);ctx.lineTo(x+w/2,y+h)}
- ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle='#d6dbe2';ctx.lineWidth=2;ctx.strokeRect(x,y,w,h)
+function saveHistory(){
+ history.push(JSON.stringify(objects));
+ if(history.length>40)history.shift();
 }
+
+function undo(){
+ if(!history.length)return;
+ objects=JSON.parse(history.pop());
+ selected=null;
+ draw();
+ sync();
+}
+
+function setTool(t,btn){
+ tool=t;
+ document.querySelectorAll(".tools button").forEach(b=>b.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+ canvas.style.cursor=t==="select"?"default":"crosshair";
+}
+
+function changeRoad(){
+ road=document.getElementById("roadType").value;
+ draw();
+}
+
+function roadColor(){
+ return document.getElementById("roadColor").value;
+}
+
+function roundedRect(c,x,y,w,h,r){
+ c.beginPath();
+ c.roundRect(x,y,w,h,r);
+}
+
 function background(){
- ctx.fillStyle='#edf0f3';ctx.fillRect(0,0,1000,680);
- if(document.getElementById('grid').value==='yes'){
-  ctx.strokeStyle='#e3e7ec';ctx.lineWidth=1;
-  for(let x=0;x<1000;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,680);ctx.stroke()}
-  for(let y=0;y<680;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1000,y);ctx.stroke()}
- }
- const m=document.getElementById('background').value;
- if(m==='cross'){road(0,230,1000,220);road(390,0,220,680)}
- if(m==='straight')road(0,150,1000,380);
- if(m==='road')road(0,200,1000,280);
- if(m==='parking'){
-  ctx.fillStyle='#747d88';ctx.fillRect(35,35,930,610);ctx.strokeStyle='#fff';ctx.lineWidth=2;
-  for(let x=85;x<950;x+=95){ctx.beginPath();ctx.moveTo(x,65);ctx.lineTo(x,615);ctx.stroke()}
+ ctx.fillStyle="#d9d9d1";
+ ctx.fillRect(0,0,1000,680);
+
+ if(road==="horizontal")drawStraightHorizontal();
+ if(road==="vertical")drawStraightVertical();
+ if(road==="twoway")drawTwoWay();
+ if(road==="cross")drawCross();
+ if(road==="tdown")drawT("down");
+ if(road==="tup")drawT("up");
+ if(road==="tleft")drawT("left");
+ if(road==="tright")drawT("right");
+ if(road==="corner")drawCorner();
+ if(road==="roundabout")drawRoundabout();
+ if(road==="avenue")drawAvenue();
+ if(road==="oneway")drawOneWay();
+ if(road==="parking")drawParking();
+}
+
+function drawStraightHorizontal(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(0,235,1000,210);
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(0,247,1000,186);
+
+ ctx.strokeStyle="#eeeeea";
+ ctx.lineWidth=3;
+ ctx.setLineDash([24,20]);
+ ctx.beginPath();
+ ctx.moveTo(0,340);
+ ctx.lineTo(1000,340);
+ ctx.stroke();
+ ctx.setLineDash([]);
+}
+
+function drawStraightVertical(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(395,0,210,680);
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(407,0,186,680);
+
+ ctx.strokeStyle="#eeeeea";
+ ctx.lineWidth=3;
+ ctx.setLineDash([24,20]);
+ ctx.beginPath();
+ ctx.moveTo(500,0);
+ ctx.lineTo(500,680);
+ ctx.stroke();
+ ctx.setLineDash([]);
+}
+
+function drawTwoWay(){
+ // Calçadas e bordas
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(0,225,1000,230);
+
+ // Asfalto
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(0,240,1000,200);
+
+ // Dupla linha amarela central
+ ctx.strokeStyle="#f2d34f";
+ ctx.lineWidth=3;
+ ctx.setLineDash([]);
+ ctx.beginPath();
+ ctx.moveTo(0,337);
+ ctx.lineTo(1000,337);
+ ctx.moveTo(0,343);
+ ctx.lineTo(1000,343);
+ ctx.stroke();
+
+ // Setas de sentidos opostos
+ for(let x=130;x<1000;x+=250){
+  drawArrowAt(x,285,0,"#eeeeee");
+  drawArrowAt(x+100,395,Math.PI,"#eeeeee");
  }
 }
-function roundRect(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
 
-function drawVehicle(o){
- const [w,h]=sizes[o.type];
- ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.angle*Math.PI/180);ctx.scale(o.scale,o.scale);
- const wheel=(x,y)=>{
-  ctx.fillStyle='#171d26';roundRect(x-5,y-10,10,20,3);ctx.fill();
-  ctx.fillStyle='#69717c';roundRect(x-2.5,y-7,5,14,2);ctx.fill()
- };
- if(['car','pickup','bus','truck'].includes(o.type)){
-  const body=o.type==='bus'?{x:-w/2,y:-h/2,w,h,r:12}:o.type==='truck'?{x:-w/2,y:-h/2,w:w*.57,h,r:5}:{x:-w*.36,y:-h/2,w:w*.72,h,r:Math.min(15,h/3)};
-  if(o.type==='truck'){
-   ctx.fillStyle='#222b38';roundRect(-w/2,-h/2,w*.58,h,5);ctx.fill();
-   ctx.fillStyle=o.color;roundRect(-w/2+3,-h/2+3,w*.52,h-6,4);ctx.fill();
-   ctx.strokeStyle='#778392';ctx.lineWidth=1.5;ctx.strokeRect(-w/2+9,-h/2+7,w*.38,h-14);
-   ctx.fillStyle=o.color;roundRect(w*.08,-h*.43,w*.39,h*.86,8);ctx.fill();
-   ctx.fillStyle='#c9e6f6';roundRect(w*.19,-h*.32,w*.22,h*.64,4);ctx.fill();
-   wheel(-w*.27,-h/2+2);wheel(-w*.27,h/2-2);wheel(w*.34,-h/2+2);wheel(w*.34,h/2-2);
-  }else{
-   ctx.fillStyle='#202936';roundRect(body.x-3,body.y-2,body.w+6,body.h+4,body.r+2);ctx.fill();
-   ctx.fillStyle=o.color;roundRect(body.x,body.y,body.w,body.h,body.r);ctx.fill();
-   if(o.type==='bus'){
-    ctx.fillStyle='#c9e6f6';roundRect(-w*.37,-h*.34,w*.74,h*.68,5);ctx.fill();
-    ctx.strokeStyle='#62788b';ctx.lineWidth=1.5;
-    for(let x=-w*.2;x<w*.4;x+=w*.2){ctx.beginPath();ctx.moveTo(x,-h*.32);ctx.lineTo(x,h*.32);ctx.stroke()}
-    ctx.fillStyle='#f6e5a0';ctx.fillRect(w*.35,-h*.25,5,h*.5);
-    wheel(-w*.32,-h/2+2);wheel(-w*.32,h/2-2);wheel(w*.32,-h/2+2);wheel(w*.32,h/2-2);
-   }else{
-    ctx.fillStyle='#c9e6f6';roundRect(-w*.24,-h*.37,w*.48,h*.24,5);ctx.fill();
-    ctx.fillStyle='#a9cddd';roundRect(-w*.24,h*.13,w*.48,h*.23,5);ctx.fill();
-    ctx.fillStyle=o.color;roundRect(-w*.29,-h*.08,w*.58,h*.16,3);ctx.fill();
-    wheel(-w*.27,-h/2+2);wheel(-w*.27,h/2-2);wheel(w*.27,-h/2+2);wheel(w*.27,h/2-2);
-    ctx.fillStyle='#fff5c4';ctx.fillRect(-w*.23,-h/2+2,9,4);ctx.fillRect(w*.23,-h/2+2,9,4);
-    ctx.fillStyle='#e85a55';ctx.fillRect(-w*.23,h/2-6,8,4);ctx.fillRect(w*.23,h/2-6,8,4);
-   }
-  }
- }else if(o.type==='motorcycle'){
-  ctx.fillStyle='#171d26';roundRect(-w*.43,-h*.43,w*.86,h*.22,5);ctx.fill();roundRect(-w*.43,h*.21,w*.86,h*.22,5);ctx.fill();
-  ctx.fillStyle=o.color;ctx.beginPath();ctx.moveTo(-w*.3,0);ctx.lineTo(-w*.08,-h*.36);ctx.lineTo(w*.25,-h*.28);ctx.lineTo(w*.38,0);ctx.lineTo(w*.22,h*.28);ctx.lineTo(-w*.08,h*.36);ctx.closePath();ctx.fill();ctx.strokeStyle='#273448';ctx.lineWidth=2;ctx.stroke();
-  ctx.fillStyle='#d6e9f3';ctx.beginPath();ctx.ellipse(w*.27,0,6,8,0,0,Math.PI*2);ctx.fill();
- }else if(o.type==='bike'){
-  ctx.strokeStyle='#202936';ctx.lineWidth=3;ctx.beginPath();ctx.arc(-w*.34,0,h*.43,0,Math.PI*2);ctx.arc(w*.34,0,h*.43,0,Math.PI*2);ctx.stroke();
-  ctx.strokeStyle=o.color;ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();
-  ctx.moveTo(-w*.34,0);ctx.lineTo(-w*.04,-h*.38);ctx.lineTo(w*.12,0);ctx.lineTo(-w*.34,0);ctx.lineTo(w*.34,0);ctx.lineTo(w*.12,0);ctx.lineTo(w*.02,-h*.42);ctx.moveTo(-w*.12,-h*.38);ctx.lineTo(w*.02,-h*.38);ctx.moveTo(w*.02,-h*.42);ctx.lineTo(w*.2,-h*.42);ctx.stroke();
-  ctx.fillStyle='#303846';ctx.beginPath();ctx.arc(w*.02,-h*.43,4,0,Math.PI*2);ctx.fill();
- }else if(o.type==='traffic'){
-  ctx.fillStyle='#252d38';roundRect(-w*.34,-h*.47,w*.68,h*.94,6);ctx.fill();
-  ['#e34b4b','#e9bd43','#3ca66b'].forEach((c,i)=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(0,-h*.27+i*h*.27,6,0,Math.PI*2);ctx.fill()});
-  ctx.fillStyle='#333';ctx.fillRect(-3,h*.47-1,6,13);
- }else if(o.type==='stop'||o.type==='sign'){
+function drawCross(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.beginPath();
+ ctx.moveTo(390,0);ctx.lineTo(610,0);
+ ctx.lineTo(610,230);ctx.lineTo(1000,230);
+ ctx.lineTo(1000,450);ctx.lineTo(610,450);
+ ctx.lineTo(610,680);ctx.lineTo(390,680);
+ ctx.lineTo(390,450);ctx.lineTo(0,450);
+ ctx.lineTo(0,230);ctx.lineTo(390,230);
+ ctx.closePath();ctx.fill();
+
+ ctx.fillStyle=roadColor();
+ ctx.beginPath();
+ ctx.moveTo(405,0);ctx.lineTo(595,0);
+ ctx.lineTo(595,245);ctx.lineTo(1000,245);
+ ctx.lineTo(1000,435);ctx.lineTo(595,435);
+ ctx.lineTo(595,680);ctx.lineTo(405,680);
+ ctx.lineTo(405,435);ctx.lineTo(0,435);
+ ctx.lineTo(0,245);ctx.lineTo(405,245);
+ ctx.closePath();ctx.fill();
+
+ ctx.strokeStyle="#eeeeea";
+ ctx.lineWidth=3;
+ ctx.setLineDash([22,18]);
+ ctx.beginPath();
+ ctx.moveTo(0,340);ctx.lineTo(1000,340);
+ ctx.moveTo(500,0);ctx.lineTo(500,680);
+ ctx.stroke();
+ ctx.setLineDash([]);
+}
+
+function drawT(direction){
+ ctx.fillStyle="#c2c1b9";
+
+ if(direction==="down"){
+  ctx.fillRect(0,225,1000,230);
+  ctx.fillRect(390,225,220,455);
+ }else if(direction==="up"){
+  ctx.fillRect(0,225,1000,230);
+  ctx.fillRect(390,0,220,455);
+ }else if(direction==="left"){
+  ctx.fillRect(390,0,220,680);
+  ctx.fillRect(0,225,610,230);
+ }else{
+  ctx.fillRect(390,0,220,680);
+  ctx.fillRect(390,225,610,230);
+ }
+
+ ctx.fillStyle=roadColor();
+
+ if(direction==="down"){
+  ctx.fillRect(0,240,1000,200);
+  ctx.fillRect(405,240,190,440);
+ }else if(direction==="up"){
+  ctx.fillRect(0,240,1000,200);
+  ctx.fillRect(405,0,190,440);
+ }else if(direction==="left"){
+  ctx.fillRect(405,0,190,680);
+  ctx.fillRect(0,240,595,200);
+ }else{
+  ctx.fillRect(405,0,190,680);
+  ctx.fillRect(405,240,595,200);
+ }
+
+ ctx.strokeStyle="#eee";
+ ctx.lineWidth=3;
+ ctx.setLineDash([22,18]);
+ ctx.beginPath();
+
+ if(direction==="down"){
+  ctx.moveTo(0,340);ctx.lineTo(1000,340);
+  ctx.moveTo(500,340);ctx.lineTo(500,680);
+ }else if(direction==="up"){
+  ctx.moveTo(0,340);ctx.lineTo(1000,340);
+  ctx.moveTo(500,0);ctx.lineTo(500,340);
+ }else if(direction==="left"){
+  ctx.moveTo(500,0);ctx.lineTo(500,680);
+  ctx.moveTo(0,340);ctx.lineTo(500,340);
+ }else{
+  ctx.moveTo(500,0);ctx.lineTo(500,680);
+  ctx.moveTo(500,340);ctx.lineTo(1000,340);
+ }
+ ctx.stroke();
+ ctx.setLineDash([]);
+}
+
+function drawCorner(){
+ ctx.lineCap="round";
+ ctx.lineJoin="round";
+
+ ctx.strokeStyle="#c2c1b9";
+ ctx.lineWidth=230;
+ ctx.beginPath();
+ ctx.moveTo(0,340);
+ ctx.lineTo(500,340);
+ ctx.quadraticCurveTo(590,340,590,430);
+ ctx.lineTo(590,680);
+ ctx.stroke();
+
+ ctx.strokeStyle=roadColor();
+ ctx.lineWidth=200;
+ ctx.beginPath();
+ ctx.moveTo(0,340);
+ ctx.lineTo(500,340);
+ ctx.quadraticCurveTo(575,340,575,415);
+ ctx.lineTo(575,680);
+ ctx.stroke();
+
+ ctx.strokeStyle="#eee";
+ ctx.lineWidth=3;
+ ctx.setLineDash([22,18]);
+ ctx.beginPath();
+ ctx.moveTo(0,340);
+ ctx.lineTo(500,340);
+ ctx.quadraticCurveTo(575,340,575,415);
+ ctx.lineTo(575,680);
+ ctx.stroke();
+ ctx.setLineDash([]);
+}
+
+function drawRoundabout(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(390,0,220,680);
+ ctx.fillRect(0,230,1000,220);
+
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(405,0,190,680);
+ ctx.fillRect(0,245,1000,190);
+
+ ctx.fillStyle="#c2c1b9";
+ ctx.beginPath();
+ ctx.arc(500,340,225,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.fillStyle=roadColor();
+ ctx.beginPath();
+ ctx.arc(500,340,210,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.fillStyle="#c2c1b9";
+ ctx.beginPath();
+ ctx.arc(500,340,105,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.fillStyle="#a6b08d";
+ ctx.beginPath();
+ ctx.arc(500,340,91,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.strokeStyle="#eee";
+ ctx.lineWidth=3;
+ ctx.setLineDash([16,14]);
+ ctx.beginPath();
+ ctx.arc(500,340,155,0,Math.PI*2);
+ ctx.stroke();
+ ctx.setLineDash([]);
+
+ ctx.fillStyle="#65734e";
+ ctx.beginPath();
+ ctx.arc(500,340,18,0,Math.PI*2);
+ ctx.fill();
+}
+
+function drawAvenue(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(0,145,1000,390);
+
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(0,160,1000,155);
+ ctx.fillRect(0,365,1000,155);
+
+ ctx.fillStyle="#a6b08d";
+ ctx.fillRect(0,315,1000,50);
+
+ ctx.strokeStyle="#8b9875";
+ ctx.lineWidth=2;
+ ctx.strokeRect(0,315,1000,50);
+
+ for(let x=60;x<980;x+=120){
+  ctx.fillStyle="#687c51";
   ctx.beginPath();
-  if(o.type==='stop'){
-   for(let i=0;i<8;i++){let a=Math.PI/8+i*Math.PI/4;let x=Math.cos(a)*w*.48,y=Math.sin(a)*h*.48;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
-   ctx.closePath();ctx.fillStyle='#d94747';ctx.fill();ctx.strokeStyle='#992a2a';ctx.lineWidth=2;ctx.stroke();
-   ctx.fillStyle='white';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('PARE',0,4);
-  }else{
-   ctx.moveTo(0,-h*.5);ctx.lineTo(w*.5,h*.43);ctx.lineTo(-w*.5,h*.43);ctx.closePath();
-   ctx.fillStyle='#f2c94c';ctx.fill();ctx.strokeStyle='#876515';ctx.lineWidth=2;ctx.stroke();
-   ctx.fillStyle='#222';ctx.font='bold 25px Arial';ctx.textAlign='center';ctx.fillText('!',0,12);
-  }
- }else if(o.type==='person'){
-  ctx.fillStyle='#e2b993';ctx.beginPath();ctx.arc(0,-h*.28,7,0,Math.PI*2);ctx.fill();
-  ctx.strokeStyle='#315d9b';ctx.lineWidth=6;ctx.lineCap='round';ctx.beginPath();
-  ctx.moveTo(0,-h*.12);ctx.lineTo(0,h*.18);ctx.moveTo(0,-h*.04);ctx.lineTo(-12,h*.08);ctx.moveTo(0,-h*.04);ctx.lineTo(12,h*.08);ctx.moveTo(0,h*.18);ctx.lineTo(-10,h*.46);ctx.moveTo(0,h*.18);ctx.lineTo(10,h*.46);ctx.stroke();
- }else if(o.type==='cone'){
-  ctx.fillStyle='#333b46';roundRect(-w*.48,h*.27,w*.96,h*.16,4);ctx.fill();
-  ctx.beginPath();ctx.moveTo(0,-h*.48);ctx.lineTo(w*.34,h*.27);ctx.lineTo(-w*.34,h*.27);ctx.closePath();ctx.fillStyle='#f07832';ctx.fill();ctx.strokeStyle='#a84616';ctx.lineWidth=2;ctx.stroke();
-  ctx.fillStyle='white';ctx.fillRect(-w*.22,h*.03,w*.44,5);
- }else if(o.type==='impact'){
-  ctx.fillStyle='#f5c542';ctx.strokeStyle='#d65b36';ctx.lineWidth=2;ctx.beginPath();
-  for(let i=0;i<12;i++){let a=i*Math.PI/6,r=i%2?w*.29:w*.5,x=Math.cos(a)*r,y=Math.sin(a)*r;i?ctx.lineTo(x,y):ctx.moveTo(x,y)}
-  ctx.closePath();ctx.fill();ctx.stroke();
- }else if(o.type==='arrow'){
-  ctx.fillStyle=o.color;ctx.beginPath();ctx.moveTo(-w*.5,-h*.18);ctx.lineTo(w*.12,-h*.18);ctx.lineTo(w*.12,-h*.48);ctx.lineTo(w*.5,0);ctx.lineTo(w*.12,h*.48);ctx.lineTo(w*.12,h*.18);ctx.lineTo(-w*.5,h*.18);ctx.closePath();ctx.fill();
- }else if(o.type==='text'){
-  ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.textBaseline='middle';let tw=ctx.measureText(o.label).width+18;
-  ctx.fillStyle='white';ctx.strokeStyle=o.color;ctx.lineWidth=2;roundRect(-tw/2,-16,tw,32,6);ctx.fill();ctx.stroke();
-  ctx.fillStyle='#202a3b';ctx.fillText(o.label,0,0);
+  ctx.arc(x,340,10,0,Math.PI*2);
+  ctx.fill();
  }
- if(o.label&&o.type!=='text'&&o.type!=='impact'&&o.type!=='arrow'&&o.type!=='stop'&&o.type!=='sign'){
-  ctx.rotate(-o.angle*Math.PI/180);ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillStyle='#202a3b';ctx.fillText(o.label,0,h*.5+17);
+
+ ctx.strokeStyle="#eee";
+ ctx.lineWidth=3;
+ ctx.setLineDash([22,18]);
+ ctx.beginPath();
+ ctx.moveTo(0,237);ctx.lineTo(1000,237);
+ ctx.moveTo(0,442);ctx.lineTo(1000,442);
+ ctx.stroke();
+ ctx.setLineDash([]);
+}
+
+function drawOneWay(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(0,235,1000,210);
+
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(0,247,1000,186);
+
+ ctx.strokeStyle="#eee";
+ ctx.lineWidth=3;
+ ctx.setLineDash([22,18]);
+ ctx.beginPath();
+ ctx.moveTo(0,340);ctx.lineTo(1000,340);
+ ctx.stroke();
+ ctx.setLineDash([]);
+
+ for(let x=160;x<900;x+=250){
+  drawArrowAt(x,340,0,"#e9e9e9");
  }
- if(o.id===selected){ctx.setLineDash([5,4]);ctx.strokeStyle='#6546d7';ctx.lineWidth=2;ctx.strokeRect(-w/2-7,-h/2-7,w+14,h+14);ctx.setLineDash([])}
+}
+
+function drawArrowAt(x,y,angle,color){
+ ctx.save();
+ ctx.translate(x,y);
+ ctx.rotate(angle);
+ ctx.fillStyle=color;
+ ctx.beginPath();
+ ctx.moveTo(24,0);
+ ctx.lineTo(-12,-15);
+ ctx.lineTo(-12,-6);
+ ctx.lineTo(-30,-6);
+ ctx.lineTo(-30,6);
+ ctx.lineTo(-12,6);
+ ctx.lineTo(-12,15);
+ ctx.closePath();
+ ctx.fill();
  ctx.restore();
 }
-function draw(){
- ctx.clearRect(0,0,1000,680);
- background();
- objects.forEach(o=>drawVehicle(o));
- document.getElementById('count').textContent=objects.length+' elemento(s) adicionado(s)';
+
+function drawParking(){
+ ctx.fillStyle="#c2c1b9";
+ ctx.fillRect(0,100,1000,480);
+
+ ctx.fillStyle=roadColor();
+ ctx.fillRect(15,115,970,450);
+
+ ctx.strokeStyle="#eee";
+ ctx.lineWidth=3;
+
+ for(let x=70;x<950;x+=110){
+  ctx.beginPath();
+  ctx.moveTo(x,130);ctx.lineTo(x,255);
+  ctx.moveTo(x,425);ctx.lineTo(x,550);
+  ctx.stroke();
+ }
+
+ ctx.beginPath();
+ ctx.moveTo(15,340);ctx.lineTo(985,340);
+ ctx.stroke();
 }
-function sync(){
- const o=objects.find(v=>v.id===selected);
- document.getElementById('properties').style.display=o?'block':'none';
- document.getElementById('selectedInfo').textContent=o?names[o.type]+' selecionado.':'Nenhum elemento selecionado.';
- if(o){
-  document.getElementById('objLabel').value=o.label;
-  document.getElementById('objColor').value=o.color;
-  document.getElementById('objSize').value=o.scale;
-  document.getElementById('objAngle').value=o.angle;
+
+function drawVehicle(o){
+ ctx.save();
+ ctx.translate(o.x,o.y);
+ ctx.rotate(o.rot*Math.PI/180);
+ ctx.scale(
+  o.w/(defaults[o.type]?.w||o.w),
+  o.h/(defaults[o.type]?.h||o.h)
+ );
+
+ const w=defaults[o.type]?.w||o.w;
+ const h=defaults[o.type]?.h||o.h;
+
+ if(o.type==="car"||o.type==="suv")drawCar(o,w,h);
+ else if(o.type==="moto")drawMotorcycle(o);
+ else if(o.type==="bike")drawBike(o);
+ else if(o.type==="truck")drawTruck(o);
+ else if(o.type==="bus")drawBus(o);
+ else if(o.type==="person")drawPerson(o);
+ else if(o.type==="crosswalk")drawCrosswalk(o);
+ else if(o.type==="cone")drawCone(o);
+ else if(o.type==="trafficlight")drawTrafficLight(o);
+ else if(o.type==="stop")drawStop(o);
+ else if(o.type==="arrow")drawArrowObject(o);
+ else if(o.type==="impact")drawImpact(o);
+ else if(o.type==="text")drawTextObject(o);
+
+ ctx.restore();
+
+ if(selected===o.id){
+  ctx.save();
+  ctx.translate(o.x,o.y);
+  ctx.rotate(o.rot*Math.PI/180);
+  ctx.strokeStyle="#2499f2";
+  ctx.lineWidth=2;
+  ctx.setLineDash([6,4]);
+  ctx.strokeRect(-o.w/2-5,-o.h/2-5,o.w+10,o.h+10);
+  ctx.setLineDash([]);
+  ctx.restore();
  }
 }
+
+function drawCar(o,w,h){
+ ctx.save();
+ ctx.translate(-w/2,-h/2);
+
+ ctx.fillStyle="rgba(0,0,0,.25)";
+ roundedRect(ctx,3,3,w,h,12);
+ ctx.fill();
+
+ ctx.fillStyle="#17191c";
+ [[12,3],[w-12,3],[12,h-3],[w-12,h-3]].forEach(p=>{
+  roundedRect(ctx,p[0]-7,p[1]-5,14,10,3);
+  ctx.fill();
+ });
+
+ ctx.fillStyle=o.color;
+ roundedRect(ctx,7,2,w-14,h-4,11);
+ ctx.fill();
+ ctx.strokeStyle="#30343a";
+ ctx.lineWidth=1.5;
+ ctx.stroke();
+
+ ctx.fillStyle="#536b78";
+ roundedRect(ctx,w*.59,7,w*.22,h-14,5);
+ ctx.fill();
+
+ ctx.fillStyle="#344b59";
+ roundedRect(ctx,w*.18,7,w*.18,h-14,4);
+ ctx.fill();
+
+ ctx.strokeStyle="#26343b";
+ ctx.lineWidth=2;
+ ctx.beginPath();
+ ctx.moveTo(w*.52,5);
+ ctx.lineTo(w*.52,h-5);
+ ctx.stroke();
+
+ ctx.fillStyle="#fff4d1";
+ ctx.fillRect(w-10,8,5,7);
+ ctx.fillRect(w-10,h-15,5,7);
+
+ ctx.fillStyle="#d83b3b";
+ ctx.fillRect(5,8,4,7);
+ ctx.fillRect(5,h-15,4,7);
+
+ ctx.restore();
+}
+
+function drawMotorcycle(o){
+ const w=65,h=28;
+ ctx.save();
+ ctx.translate(-w/2,-h/2);
+
+ ctx.fillStyle="#111";
+ roundedRect(ctx,4,8,12,12,5);
+ ctx.fill();
+ roundedRect(ctx,49,8,12,12,5);
+ ctx.fill();
+
+ ctx.fillStyle=o.color;
+ roundedRect(ctx,16,7,34,14,6);
+ ctx.fill();
+
+ ctx.strokeStyle="#aaa";
+ ctx.lineWidth=1.5;
+ ctx.stroke();
+
+ ctx.fillStyle="#bfc5c9";
+ roundedRect(ctx,24,9,18,10,4);
+ ctx.fill();
+
+ ctx.strokeStyle="#17191c";
+ ctx.lineWidth=3;
+ ctx.beginPath();
+ ctx.moveTo(49,14);
+ ctx.lineTo(59,4);
+ ctx.moveTo(49,14);
+ ctx.lineTo(59,24);
+ ctx.stroke();
+
+ ctx.fillStyle="#fff0b0";
+ ctx.beginPath();
+ ctx.arc(59,14,3,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.restore();
+}
+
+function drawBike(o){
+ const w=70,h=30;
+ ctx.save();
+ ctx.translate(-w/2,-h/2);
+
+ ctx.strokeStyle="#17191c";
+ ctx.lineWidth=2.5;
+ ctx.beginPath();
+ ctx.arc(9,15,9,0,Math.PI*2);
+ ctx.arc(61,15,9,0,Math.PI*2);
+ ctx.stroke();
+
+ ctx.strokeStyle=o.color;
+ ctx.lineWidth=3;
+ ctx.beginPath();
+ ctx.moveTo(9,15);
+ ctx.lineTo(29,15);
+ ctx.lineTo(39,5);
+ ctx.lineTo(61,15);
+ ctx.lineTo(29,15);
+ ctx.lineTo(23,5);
+ ctx.lineTo(39,5);
+ ctx.stroke();
+
+ ctx.strokeStyle="#222";
+ ctx.lineWidth=2;
+ ctx.beginPath();
+ ctx.moveTo(39,5);
+ ctx.lineTo(44,1);
+ ctx.moveTo(23,5);
+ ctx.lineTo(17,2);
+ ctx.arc(29,15,4,0,Math.PI*2);
+ ctx.stroke();
+
+ ctx.restore();
+}
+
+function drawTruck(o){
+ const w=145,h=58;
+ ctx.save();
+ ctx.translate(-w/2,-h/2);
+
+ ctx.fillStyle="#17191c";
+ [8,48].forEach(y=>{
+  roundedRect(ctx,12,y-5,18,10,3);
+  ctx.fill();
+  roundedRect(ctx,116,y-5,18,10,3);
+  ctx.fill();
+ });
+
+ ctx.fillStyle=o.color;
+ roundedRect(ctx,3,3,92,h-6,5);
+ ctx.fill();
+ ctx.strokeStyle="#444";
+ ctx.lineWidth=1.5;
+ ctx.stroke();
+
+ ctx.fillStyle="#aebcc5";
+ roundedRect(ctx,98,5,43,h-10,6);
+ ctx.fill();
+
+ ctx.fillStyle="#526b79";
+ roundedRect(ctx,105,9,27,h-18,4);
+ ctx.fill();
+
+ ctx.fillStyle="#fff1bd";
+ ctx.fillRect(137,9,4,8);
+ ctx.fillRect(137,h-17,4,8);
+
+ ctx.restore();
+}
+
+function drawBus(o){
+ const w=170,h=58;
+ ctx.save();
+ ctx.translate(-w/2,-h/2);
+
+ ctx.fillStyle="#17191c";
+ [15,45].forEach(y=>{
+  roundedRect(ctx,15,y-5,18,10,3);
+  ctx.fill();
+  roundedRect(ctx,145,y-5,18,10,3);
+  ctx.fill();
+ });
+
+ ctx.fillStyle=o.color;
+ roundedRect(ctx,3,2,w-6,h-4,10);
+ ctx.fill();
+ ctx.strokeStyle="#444";
+ ctx.stroke();
+
+ ctx.fillStyle="#516b79";
+ for(let x=20;x<145;x+=25){
+  roundedRect(ctx,x,7,19,h-14,3);
+  ctx.fill();
+ }
+
+ ctx.fillStyle="#333";
+ ctx.fillRect(12,27,146,3);
+
+ ctx.fillStyle="#fff1bd";
+ ctx.fillRect(160,10,4,8);
+ ctx.fillRect(160,h-18,4,8);
+
+ ctx.restore();
+}
+
+function drawPerson(o){
+ ctx.save();
+ ctx.translate(-12,-12);
+
+ ctx.fillStyle="#e0b58f";
+ ctx.beginPath();
+ ctx.arc(12,5,5,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.fillStyle=o.color;
+ roundedRect(ctx,6,10,12,12,4);
+ ctx.fill();
+
+ ctx.strokeStyle="#d9ad87";
+ ctx.lineWidth=3;
+ ctx.beginPath();
+ ctx.moveTo(6,12);
+ ctx.lineTo(1,18);
+ ctx.moveTo(18,12);
+ ctx.lineTo(23,18);
+ ctx.stroke();
+
+ ctx.strokeStyle="#252a32";
+ ctx.lineWidth=4;
+ ctx.beginPath();
+ ctx.moveTo(9,21);
+ ctx.lineTo(7,26);
+ ctx.moveTo(15,21);
+ ctx.lineTo(17,26);
+ ctx.stroke();
+
+ ctx.restore();
+}
+
+function drawCrosswalk(o){
+ const w=defaults.crosswalk.w;
+ const h=defaults.crosswalk.h;
+
+ ctx.fillStyle="rgba(0,0,0,.15)";
+ ctx.fillRect(-w/2+3,-h/2+3,w,h);
+
+ ctx.fillStyle=o.color;
+ const count=7;
+
+ for(let i=0;i<count;i++){
+  ctx.fillRect(-w/2+i*(w/count),-h/2,w/count*.62,h);
+ }
+}
+
+function drawCone(o){
+ ctx.fillStyle="#e56d24";
+ ctx.beginPath();
+ ctx.moveTo(0,-15);
+ ctx.lineTo(12,12);
+ ctx.lineTo(-12,12);
+ ctx.closePath();
+ ctx.fill();
+
+ ctx.fillStyle="#fff";
+ ctx.fillRect(-7,2,14,4);
+
+ ctx.fillStyle="#292929";
+ ctx.fillRect(-15,12,30,5);
+}
+
+function drawTrafficLight(o){
+ ctx.fillStyle="#17191d";
+ roundedRect(ctx,-11,-25,22,50,5);
+ ctx.fill();
+
+ const colors=["#e63d3d","#e5b93c","#35a75d"];
+
+ colors.forEach((c,i)=>{
+  ctx.fillStyle=c;
+  ctx.beginPath();
+  ctx.arc(0,-15+i*15,5,0,Math.PI*2);
+  ctx.fill();
+ });
+}
+
+function drawStop(o){
+ ctx.fillStyle=o.color;
+ ctx.beginPath();
+
+ for(let i=0;i<8;i++){
+  const a=Math.PI/8+i*Math.PI/4;
+  const x=Math.cos(a)*24;
+  const y=Math.sin(a)*24;
+  if(i===0)ctx.moveTo(x,y);
+  else ctx.lineTo(x,y);
+ }
+
+ ctx.closePath();
+ ctx.fill();
+
+ ctx.strokeStyle="#fff";
+ ctx.lineWidth=2;
+ ctx.stroke();
+
+ ctx.fillStyle="#fff";
+ ctx.font="bold 10px Arial";
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+ ctx.fillText("PARE",0,1);
+}
+
+function drawArrowObject(o){
+ ctx.fillStyle=o.color;
+ ctx.beginPath();
+ ctx.moveTo(30,0);
+ ctx.lineTo(-10,-22);
+ ctx.lineTo(-10,-9);
+ ctx.lineTo(-30,-9);
+ ctx.lineTo(-30,9);
+ ctx.lineTo(-10,9);
+ ctx.lineTo(-10,22);
+ ctx.closePath();
+ ctx.fill();
+}
+
+function drawImpact(o){
+ ctx.strokeStyle=o.color;
+ ctx.lineWidth=4;
+
+ ctx.beginPath();
+ ctx.arc(0,0,15,0,Math.PI*2);
+ ctx.stroke();
+
+ ctx.beginPath();
+ ctx.moveTo(-22,0);ctx.lineTo(22,0);
+ ctx.moveTo(0,-22);ctx.lineTo(0,22);
+ ctx.moveTo(-15,-15);ctx.lineTo(15,15);
+ ctx.moveTo(15,-15);ctx.lineTo(-15,15);
+ ctx.stroke();
+
+ ctx.fillStyle=o.color;
+ ctx.beginPath();
+ ctx.arc(0,0,5,0,Math.PI*2);
+ ctx.fill();
+}
+
+function drawTextObject(o){
+ ctx.fillStyle=o.color;
+ ctx.font="bold 18px Arial";
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+ ctx.fillText(o.label||"Texto",0,0);
+}
+
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ background();
+ objects.forEach(o=>drawVehicle(o));
+
+ document.getElementById("count").textContent=
+ objects.length+" elemento(s) adicionado(s)";
+}
+
+function getPointer(e){
+ const r=canvas.getBoundingClientRect();
+ return {
+  x:(e.clientX-r.left)*(canvas.width/r.width),
+  y:(e.clientY-r.top)*(canvas.height/r.height)
+ };
+}
+
+function hitTest(x,y){
+ for(let i=objects.length-1;i>=0;i--){
+  const o=objects[i];
+  const dx=x-o.x;
+  const dy=y-o.y;
+  const a=-o.rot*Math.PI/180;
+  const rx=dx*Math.cos(a)-dy*Math.sin(a);
+  const ry=dx*Math.sin(a)+dy*Math.cos(a);
+
+  if(Math.abs(rx)<=o.w/2+5&&Math.abs(ry)<=o.h/2+5){
+   return o;
+  }
+ }
+ return null;
+}
+
+canvas.addEventListener("pointerdown",e=>{
+ const p=getPointer(e);
+
+ if(tool==="select"){
+  const o=hitTest(p.x,p.y);
+  selected=o?o.id:null;
+
+  if(o){
+   saveHistory();
+   dragging=true;
+   dragOffset.x=p.x-o.x;
+   dragOffset.y=p.y-o.y;
+   canvas.setPointerCapture(e.pointerId);
+  }
+
+  sync();
+  draw();
+  return;
+ }
+
+ saveHistory();
+
+ const d=defaults[tool]||{w:100,h:40,color:"#ffffff"};
+
+ const obj={
+  id:idCounter++,
+  type:tool,
+  x:p.x,
+  y:p.y,
+  w:d.w,
+  h:d.h,
+  rot:0,
+  color:d.color,
+  label:tool==="text"?"Texto":names[tool]
+ };
+
+ if(tool==="text"){
+  const t=prompt("Digite o texto que deseja inserir:","Texto");
+  if(t===null){
+   history.pop();
+   return;
+  }
+  obj.label=t;
+  obj.w=Math.max(80,t.length*12);
+ }
+
+ objects.push(obj);
+ selected=obj.id;
+
+ setTool("select",document.querySelector('[data-tool="select"]'));
+ sync();
+ draw();
+});
+
+canvas.addEventListener("pointermove",e=>{
+ if(!dragging)return;
+
+ const p=getPointer(e);
+ const o=objects.find(v=>v.id===selected);
+ if(!o)return;
+
+ o.x=Math.max(0,Math.min(1000,p.x-dragOffset.x));
+ o.y=Math.max(0,Math.min(680,p.y-dragOffset.y));
+
+ draw();
+ syncPositionOnly();
+});
+
+canvas.addEventListener("pointerup",()=>{
+ dragging=false;
+});
+
+canvas.addEventListener("pointercancel",()=>{
+ dragging=false;
+});
+
+function sync(){
+ const o=objects.find(v=>v.id===selected);
+
+ document.getElementById("properties").style.display=o?"block":"none";
+ document.getElementById("noSelection").style.display=o?"none":"block";
+
+ if(!o)return;
+
+ document.getElementById("selectedInfo").textContent=names[o.type]+" selecionado";
+ document.getElementById("objLabel").value=o.label||"";
+ document.getElementById("posX").value=Math.round(o.x);
+ document.getElementById("posY").value=Math.round(o.y);
+ document.getElementById("objW").value=Math.round(o.w);
+ document.getElementById("objH").value=Math.round(o.h);
+ document.getElementById("objRot").value=o.rot;
+ document.getElementById("rotationValue").textContent=Math.round(o.rot)+"°";
+ document.getElementById("objColor").value=o.color;
+}
+
+function syncPositionOnly(){
+ const o=objects.find(v=>v.id===selected);
+ if(!o)return;
+
+ document.getElementById("posX").value=Math.round(o.x);
+ document.getElementById("posY").value=Math.round(o.y);
+}
+
 function updateSelected(k,v){
  const o=objects.find(v=>v.id===selected);
- if(o){o[k]=v;draw()}
+ if(!o)return;
+
+ saveHistory();
+
+ if(k==="w"||k==="h"){
+  o[k]=Math.max(10,Math.min(600,v||10));
+ }else{
+  o[k]=v;
+ }
+
+ if(k==="rot"){
+  document.getElementById("rotationValue").textContent=v+"°";
+ }
+
+ draw();
 }
+
 function rotateSelected(n){
  const o=objects.find(v=>v.id===selected);
- if(o){snapshot();o.angle=(o.angle+n)%360;sync();draw()}
+ if(!o)return;
+
+ saveHistory();
+ o.rot=(o.rot+n+360)%360;
+ sync();
+ draw();
 }
+
 function deleteSelected(){
- if(!objects.some(v=>v.id===selected))return;
- snapshot();objects=objects.filter(v=>v.id!==selected);selected=null;sync();draw()
+ const index=objects.findIndex(v=>v.id===selected);
+ if(index<0)return;
+
+ saveHistory();
+ objects.splice(index,1);
+ selected=null;
+ draw();
+ sync();
 }
+
 function duplicateSelected(){
  const o=objects.find(v=>v.id===selected);
  if(!o)return;
- snapshot();
- const c={...o,id:Date.now()+Math.random(),x:o.x+35,y:o.y+35};
- objects.push(c);selected=c.id;sync();draw()
+
+ saveHistory();
+
+ const copy={...o,id:idCounter++,x:o.x+35,y:o.y+35};
+ objects.push(copy);
+ selected=copy.id;
+
+ draw();
+ sync();
 }
-function undo(){
- const s=history.pop();
- if(s){objects=JSON.parse(s);selected=null;sync();draw()}
+
+function changeLayer(direction){
+ const i=objects.findIndex(v=>v.id===selected);
+ if(i<0)return;
+
+ const j=i+direction;
+ if(j<0||j>=objects.length)return;
+
+ saveHistory();
+ [objects[i],objects[j]]=[objects[j],objects[i]];
+
+ draw();
 }
+
 function novoCroqui(){
- if(!confirm('Apagar o croqui atual?'))return;
- snapshot();objects=[];selected=null;
- ['claim','date','place','notes'].forEach(id=>document.getElementById(id).value='');
- sync();draw()
+ if(!confirm("Deseja realmente limpar todos os elementos?"))return;
+
+ saveHistory();
+ objects=[];
+ selected=null;
+ draw();
+ sync();
 }
+
 function salvarProjeto(){
  const data={
-  objects,
-  background:document.getElementById('background').value,
-  grid:document.getElementById('grid').value,
-  claim:document.getElementById('claim').value,
-  date:document.getElementById('date').value,
-  place:document.getElementById('place').value,
-  notes:document.getElementById('notes').value
+  version:1,
+  road:road,
+  roadColor:roadColor(),
+  objects:objects,
+  idCounter:idCounter
  };
- const a=document.createElement('a');
- const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
- a.href=url;a.download='sinistro-maxxiseg.json';a.click();URL.revokeObjectURL(url)
+
+ const blob=new Blob(
+  [JSON.stringify(data,null,2)],
+  {type:"application/json"}
+ );
+
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="croqui_maxxiseg.json";
+ a.click();
+ URL.revokeObjectURL(url);
 }
+
+function carregarProjeto(){
+ document.getElementById("fileInput").click();
+}
+
+function abrirArquivo(event){
+ const file=event.target.files[0];
+ if(!file)return;
+
+ const reader=new FileReader();
+
+ reader.onload=()=>{
+  try{
+   const data=JSON.parse(reader.result);
+
+   if(!Array.isArray(data.objects)){
+    throw new Error("Arquivo inválido");
+   }
+
+   saveHistory();
+
+   objects=data.objects;
+   road=data.road||"horizontal";
+   idCounter=data.idCounter||1;
+
+   document.getElementById("roadType").value=road;
+
+   if(data.roadColor){
+    document.getElementById("roadColor").value=data.roadColor;
+   }
+
+   selected=null;
+   draw();
+   sync();
+
+  }catch(err){
+   alert("Não foi possível abrir esse arquivo. Verifique se é um projeto válido.");
+  }
+ };
+
+ reader.readAsText(file);
+ event.target.value="";
+}
+
 function exportarPNG(){
- const old=selected;selected=null;draw();
- const a=document.createElement('a');
- a.download='croqui-sinistro-maxxiseg.png';
- a.href=canvas.toDataURL('image/png');a.click();
- selected=old;draw()
+ const old=selected;
+ selected=null;
+ draw();
+
+ const a=document.createElement("a");
+ a.download="croqui_maxxiseg.png";
+ a.href=canvas.toDataURL("image/png");
+ a.click();
+
+ selected=old;
+ draw();
 }
-window.addEventListener('keydown',e=>{
- if((e.key==='Delete'||e.key==='Backspace')&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName))deleteSelected();
- if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z')undo()
+
+function resetZoom(){
+ draw();
+}
+
+window.addEventListener("keydown",e=>{
+ if(e.key==="Delete"||e.key==="Backspace"){
+  if(document.activeElement.tagName==="INPUT")return;
+  deleteSelected();
+ }
+
+ if(e.ctrlKey&&e.key.toLowerCase()==="z"){
+  e.preventDefault();
+  undo();
+ }
+
+ if(e.ctrlKey&&e.key.toLowerCase()==="d"){
+  e.preventDefault();
+  duplicateSelected();
+ }
+
+ if(e.key==="Escape"){
+  selected=null;
+  setTool("select",document.querySelector('[data-tool="select"]'));
+  sync();
+  draw();
+ }
 });
-draw();sync();
+
+draw();
+sync();
 </script>
+
 </body>
 </html>
